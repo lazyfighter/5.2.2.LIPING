@@ -46,6 +46,9 @@ public interface BeanNameAware extends Aware {
 	 * names, the actual bean name might have been made unique through appending
 	 * "#..." suffixes. Use the {@link BeanFactoryUtils#originalBeanName(String)}
 	 * method to extract the original bean name (without suffix), if desired.
+	 *
+	 *
+	 * beanName注入接口，可以在beanFactory构造玩该bean然后注入name
 	 */
 	void setBeanName(String name);
 

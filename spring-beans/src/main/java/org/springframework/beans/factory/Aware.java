@@ -31,6 +31,9 @@ package org.springframework.beans.factory;
  * @author Chris Beams
  * @author Juergen Hoeller
  * @since 3.1
+ *
+ *
+ * 注入接口实现此接口的意味着有注入能力
  */
 public interface Aware {
 

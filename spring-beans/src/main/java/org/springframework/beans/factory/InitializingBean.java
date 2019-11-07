@@ -40,6 +40,8 @@ public interface InitializingBean {
 	 * configuration and final initialization when all bean properties have been set.
 	 * @throws Exception in the event of misconfiguration (such as failure to set an
 	 * essential property) or if initialization fails for any other reason
+	 *
+	 * 初始化
 	 */
 	void afterPropertiesSet() throws Exception;
 

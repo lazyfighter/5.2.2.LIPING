@@ -120,6 +120,9 @@ public interface BeanFactory {
 	 * beans <i>created</i> by the FactoryBean. For example, if the bean named
 	 * {@code myJndiObject} is a FactoryBean, getting {@code &myJndiObject}
 	 * will return the factory, not the instance returned by the factory.
+	 *
+	 *
+	 * 用来区分FactoryBean以及实际的Bean，如果采用前缀&将返回factory如果直接使用name返回的事工厂生产的对象
 	 */
 	String FACTORY_BEAN_PREFIX = "&";
 
@@ -135,6 +138,9 @@ public interface BeanFactory {
 	 * @return an instance of the bean
 	 * @throws NoSuchBeanDefinitionException if there is no bean with the specified name
 	 * @throws BeansException if the bean could not be obtained
+	 *
+	 * 根据存储bean的设计模式，返回BeanFactory中存储的bean
+	 * 向上依赖模型，如果子类找不到到父类的beanFactory中找
 	 */
 	Object getBean(String name) throws BeansException;
 
@@ -168,6 +174,10 @@ public interface BeanFactory {
 	 * the affected bean isn't a prototype
 	 * @throws BeansException if the bean could not be created
 	 * @since 2.5
+	 *
+	 * 根据名称提供指定的bean，同时可以提供显示的参数来进行构造
+	 *
+	 * 同时需要注意获取的bean的需要为prototype类型的
 	 */
 	Object getBean(String name, Object... args) throws BeansException;
 
@@ -184,6 +194,8 @@ public interface BeanFactory {
 	 * @throws BeansException if the bean could not be created
 	 * @since 3.0
 	 * @see ListableBeanFactory
+	 *
+	 * 根据类型返回指定的bean，如果含有多个此类型的bean将会抛出异常
 	 */
 	<T> T getBean(Class<T> requiredType) throws BeansException;
 
@@ -204,6 +216,8 @@ public interface BeanFactory {
 	 * the affected bean isn't a prototype
 	 * @throws BeansException if the bean could not be created
 	 * @since 4.1
+	 *
+	 * 根据类型以及提供构造参数获取指定的bean
 	 */
 	<T> T getBean(Class<T> requiredType, Object... args) throws BeansException;
 

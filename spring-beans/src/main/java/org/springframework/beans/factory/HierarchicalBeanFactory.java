@@ -30,6 +30,8 @@ import org.springframework.lang.Nullable;
  * @author Juergen Hoeller
  * @since 07.07.2003
  * @see org.springframework.beans.factory.config.ConfigurableBeanFactory#setParentBeanFactory
+ *
+ * 可分层的BeanFactory
  */
 public interface HierarchicalBeanFactory extends BeanFactory {
 
@@ -47,6 +49,9 @@ public interface HierarchicalBeanFactory extends BeanFactory {
 	 * @param name the name of the bean to query
 	 * @return whether a bean with the given name is defined in the local factory
 	 * @see BeanFactory#containsBean
+	 *
+	 *
+	 * 从本地的beanFactory中获取，不再获取父类的与containsBean不同
 	 */
 	boolean containsLocalBean(String name);
 

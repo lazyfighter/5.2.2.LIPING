@@ -59,6 +59,10 @@ import org.springframework.util.ReflectionUtils;
  * @param <T> the bean type
  * @see #setSingleton
  * @see #createInstance()
+ *
+ * AbstractFactoryBean为FactoryBean提供的模板，如果bean为单例的在初始化的时候完成单例bean的创建
+ * 如果为proptotype，则子类负责实现createInstance，然后在每次调用getObject()的时候调用该方法
+ *
  */
 public abstract class AbstractFactoryBean<T>
 		implements FactoryBean<T>, BeanClassLoaderAware, BeanFactoryAware, InitializingBean, DisposableBean {

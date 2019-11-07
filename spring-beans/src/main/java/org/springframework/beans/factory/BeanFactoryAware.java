@@ -37,6 +37,9 @@ import org.springframework.beans.BeansException;
  * @see BeanClassLoaderAware
  * @see InitializingBean
  * @see org.springframework.context.ApplicationContextAware
+ *
+ * beanFactory注入接口实现此接口意味着beanFactory能够注入
+ *
  */
 public interface BeanFactoryAware extends Aware {
 

@@ -35,6 +35,9 @@ import org.springframework.beans.BeansException;
  * @since 1.0.2
  * @param <T> the object type
  * @see FactoryBean
+ *
+ *
+ * spring用来封装用户提供的工厂模式的bean
  */
 @FunctionalInterface
 public interface ObjectFactory<T> {

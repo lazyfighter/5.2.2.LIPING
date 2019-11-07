@@ -37,6 +37,8 @@ import org.springframework.lang.Nullable;
  * @param <T> the object type
  * @see BeanFactory#getBeanProvider
  * @see org.springframework.beans.factory.annotation.Autowired
+ *
+ * ObjectFactory的增强接口，提供更多方式的访问能力
  */
 public interface ObjectProvider<T> extends ObjectFactory<T>, Iterable<T> {
 
