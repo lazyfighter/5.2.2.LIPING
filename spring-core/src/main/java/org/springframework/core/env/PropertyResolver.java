@@ -26,6 +26,8 @@ import org.springframework.lang.Nullable;
  * @since 3.1
  * @see Environment
  * @see PropertySourcesPropertyResolver
+ *
+ * 针对配置解析的，对Propterty提供的扩展能力
  */
 public interface PropertyResolver {
 

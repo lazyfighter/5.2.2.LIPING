@@ -54,6 +54,9 @@ import org.springframework.lang.Nullable;
  * @see ConfigurableApplicationContext
  * @see org.springframework.beans.factory.BeanFactory
  * @see org.springframework.core.io.ResourceLoader
+ *
+ * beanFactory只是定义了容器的特性具体的实现为ApplicationContext
+ * 在其中增加了一些可定制化的内容
  */
 public interface ApplicationContext extends EnvironmentCapable, ListableBeanFactory, HierarchicalBeanFactory,
 		MessageSource, ApplicationEventPublisher, ResourcePatternResolver {

@@ -30,6 +30,8 @@ import org.springframework.lang.Nullable;
  *
  * @author Juergen Hoeller
  * @since 3.0
+ *
+ * 解析EL表达式的解析器
  */
 public interface BeanExpressionResolver {
 
