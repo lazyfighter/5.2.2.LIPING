@@ -26,6 +26,8 @@ import java.util.EventObject;
  * @author Juergen Hoeller
  * @see org.springframework.context.ApplicationListener
  * @see org.springframework.context.event.EventListener
+ *
+ * spring的evnet的抽象
  */
 public abstract class ApplicationEvent extends EventObject {
 

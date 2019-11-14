@@ -24,6 +24,14 @@ import org.springframework.context.ApplicationEvent;
  *
  * @author Juergen Hoeller
  * @since 2.5
+ *
+ * spring的context对于event的抽象
+ *
+ * ContextClosedEvent  close
+ * ContextRefreshedEvent refreshed
+ * ContextStartedEvent started
+ * ContextStoppedEvent stoped
+ *
  */
 @SuppressWarnings("serial")
 public abstract class ApplicationContextEvent extends ApplicationEvent {

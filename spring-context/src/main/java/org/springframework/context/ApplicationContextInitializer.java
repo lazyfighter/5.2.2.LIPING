@@ -38,6 +38,11 @@ package org.springframework.context;
  * @see org.springframework.web.context.ContextLoader#CONTEXT_INITIALIZER_CLASSES_PARAM
  * @see org.springframework.web.servlet.FrameworkServlet#setContextInitializerClasses
  * @see org.springframework.web.servlet.FrameworkServlet#applyInitializers
+ *
+ *
+ * 在context#refresh之前调用初始化方法对context进行初始化
+ *
+ * 通常用于web类型的用于用于配置一些初始化的参数
  */
 public interface ApplicationContextInitializer<C extends ConfigurableApplicationContext> {
 

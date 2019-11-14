@@ -44,6 +44,8 @@ import org.springframework.util.MultiValueMap;
  * @author Phillip Webb
  * @author Juergen Hoeller
  * @since 4.0
+ *
+ * 用来解析注解Conditional的
  */
 class ConditionEvaluator {
 
