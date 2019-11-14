@@ -1,0 +1,7 @@
+description = "Spring Study"
+
+apply plugin: "java"
+
+dependencies {
+	compile(project(":spring-context"))
+}
