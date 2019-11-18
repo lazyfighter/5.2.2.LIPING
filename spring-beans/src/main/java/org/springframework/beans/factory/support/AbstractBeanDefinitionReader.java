@@ -179,6 +179,9 @@ public abstract class AbstractBeanDefinitionReader implements BeanDefinitionRead
 		return this.beanNameGenerator;
 	}
 
+	@Override public int loadBeanDefinitions(Resource resource) throws BeanDefinitionStoreException {
+		return 0;
+	}
 
 	@Override
 	public int loadBeanDefinitions(Resource... resources) throws BeanDefinitionStoreException {
