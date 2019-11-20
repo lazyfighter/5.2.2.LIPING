@@ -302,6 +302,7 @@ class ConfigurationClassParser {
 		}
 
 		// Process any @Import annotations
+		// 处理@import注解，此处需要注意@import注解需要为ioc管理的bean才能够被扫描到处理
 		processImports(configClass, sourceClass, getImports(sourceClass), true);
 
 		// Process any @ImportResource annotations
