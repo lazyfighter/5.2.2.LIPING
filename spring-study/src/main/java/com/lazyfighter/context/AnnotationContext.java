@@ -2,14 +2,14 @@ package com.lazyfighter.context;
 
 import com.lazyfighter.importselector.MyImportSelector;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import org.springframework.stereotype.Component;
 
 /**
  * @author liping
  */
 @Import(MyImportSelector.class)
-@Component
+@Configuration
 public class AnnotationContext {
 
 	public static void main(String[] args) {
