@@ -138,6 +138,8 @@ public interface ConfigurableListableBeanFactory
 	 * Freeze all bean definitions, signalling that the registered bean definitions
 	 * will not be modified or post-processed any further.
 	 * <p>This allows the factory to aggressively cache bean definition metadata.
+	 *
+	 * 冻结Configuration
 	 */
 	void freezeConfiguration();
 
@@ -145,6 +147,8 @@ public interface ConfigurableListableBeanFactory
 	 * Return whether this factory's bean definitions are frozen,
 	 * i.e. are not supposed to be modified or post-processed any further.
 	 * @return {@code true} if the factory's configuration is considered frozen
+	 *
+	 * 判断Configuration是否被冻结
 	 */
 	boolean isConfigurationFrozen();
 
@@ -156,6 +160,8 @@ public interface ConfigurableListableBeanFactory
 	 * Note: This may have left the factory with some beans already initialized!
 	 * Call {@link #destroySingletons()} for full cleanup in this case.
 	 * @see #destroySingletons()
+	 *
+	 * 提前实例化非lazy的单例bean
 	 */
 	void preInstantiateSingletons() throws BeansException;
 

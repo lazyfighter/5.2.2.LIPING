@@ -217,12 +217,13 @@ public class InjectionMetadata {
 		 */
 		protected void inject(Object target, @Nullable String requestingBeanName, @Nullable PropertyValues pvs)
 				throws Throwable {
-
+			// 如果需要注入的为成员变量，责直接利用反射设置值
 			if (this.isField) {
 				Field field = (Field) this.member;
 				ReflectionUtils.makeAccessible(field);
 				field.set(target, getResourceToInject(target, requestingBeanName));
 			}
+			// 如果需要注入的是方法则反射调用
 			else {
 				if (checkPropertySkipping(pvs)) {
 					return;

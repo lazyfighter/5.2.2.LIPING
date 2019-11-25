@@ -4,5 +4,4 @@
 	   xmlns:context="http://www.springframework.org/schema/context"
 	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 	<bean id="helloService" class="com.lazyfighter.service.impl.HelloServiceImpl"></bean>
-	<context:annotation-config/>
 </beans>

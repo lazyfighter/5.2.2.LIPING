@@ -64,6 +64,31 @@ public final class BridgeMethodResolver {
 	 * @param bridgeMethod the method to introspect
 	 * @return the original method (either the bridged method or the passed-in method
 	 * if no more specific one could be found)
+	 *
+	 * 判断方式是否为桥接方法， 如果不是直接返回，如果是找到桥接的方法
+	 *
+	 * 桥接方法是指，在jdk5之前是没有泛型的，但是有时候接口提供泛型类似的方法，例如
+	 * public interface SuperClass<T> {
+	 *     void method(T t);
+	 * }
+	 *
+	 * public class AClass implements SuperClass<String> {
+	 *     @Override
+	 *     public void method(String s) {
+	 * 　　　　System.out.println(s);
+	 * 　　}
+	 * }
+	 *
+	 * public class AClass implements SuperClass  {
+	 *     public void method(String s) {
+	 *         System.out.println(s);
+	 *     }
+	 *     public void method(Object s) {
+	 *          this.method((String) s);
+	 *     }
+	 * }
+	 *
+	 * 但是因为没有泛型，因此接口的方法实质是Object类型，因此在编译的时候自动加上了一个桥接方法
 	 */
 	public static Method findBridgedMethod(Method bridgeMethod) {
 		if (!bridgeMethod.isBridge()) {

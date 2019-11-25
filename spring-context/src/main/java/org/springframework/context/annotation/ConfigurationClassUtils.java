@@ -84,6 +84,10 @@ abstract class ConfigurationClassUtils {
 	 * @return whether the candidate qualifies as (any kind of) configuration class
 	 *
 	 * 判断给定的beanDefinition是否为Configuration配置类
+	 *
+	 * 1. 获取bean的注解元信息
+	 * 2. 判断bean是否被@Configuration注解
+	 * 3.
 	 */
 	public static boolean checkConfigurationClassCandidate(
 			BeanDefinition beanDef, MetadataReaderFactory metadataReaderFactory) {
@@ -153,6 +157,11 @@ abstract class ConfigurationClassUtils {
 	 * @param metadata the metadata of the annotated class
 	 * @return {@code true} if the given class is to be registered for
 	 * configuration class processing; {@code false} otherwise
+	 *
+	 *
+	 * 如果给定的注解元数据中包含
+	 * @Component @ComponentScan @Import @ImportResource
+	 * 或者包含有被@bean注解的method 则位Configuration
 	 */
 	public static boolean isConfigurationCandidate(AnnotationMetadata metadata) {
 		// Do not consider an interface or an annotation...

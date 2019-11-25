@@ -26,6 +26,9 @@ import org.springframework.context.ApplicationContextException;
 import org.springframework.lang.Nullable;
 
 /**
+ * 提供beanFactory的实例化以及销毁实现，同时提供接口loadBeanDefinitions，用于子类实现
+ * bean的加载
+ *
  * Base class for {@link org.springframework.context.ApplicationContext}
  * implementations which are supposed to support multiple calls to {@link #refresh()},
  * creating a new internal bean factory instance every time.
