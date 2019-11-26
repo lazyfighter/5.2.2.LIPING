@@ -473,6 +473,8 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 	 * Central method of this class: creates a bean instance,
 	 * populates the bean instance, applies post-processors, etc.
 	 * @see #doCreateBean
+	 *
+	 * 构建bean，注入bean实例，执行postProcessor
 	 */
 	@Override
 	protected Object createBean(String beanName, RootBeanDefinition mbd, @Nullable Object[] args)
@@ -486,6 +488,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 		// Make sure bean class is actually resolved at this point, and
 		// clone the bean definition in case of a dynamically resolved Class
 		// which cannot be stored in the shared merged bean definition.
+		// 获取bean的class类型
 		Class<?> resolvedClass = resolveBeanClass(mbd, beanName);
 		if (resolvedClass != null && !mbd.hasBeanClass() && mbd.getBeanClassName() != null) {
 			mbdToUse = new RootBeanDefinition(mbd);
@@ -503,6 +506,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 
 		try {
 			// Give BeanPostProcessors a chance to return a proxy instead of the target bean instance.
+			// bean实例化之前的前置处理器，如果这里返回则返回的是一个代理， AOP基于此处实现
 			Object bean = resolveBeforeInstantiation(beanName, mbdToUse);
 			if (bean != null) {
 				return bean;
@@ -514,6 +518,8 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 		}
 
 		try {
+
+			// 创建bean
 			Object beanInstance = doCreateBean(beanName, mbdToUse, args);
 			if (logger.isTraceEnabled()) {
 				logger.trace("Finished creating instance of bean '" + beanName + "'");
@@ -564,6 +570,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 		}
 
 		// Allow post-processors to modify the merged bean definition.
+		// 允许后置处理器修改beanDefinition
 		synchronized (mbd.postProcessingLock) {
 			if (!mbd.postProcessed) {
 				try {
@@ -579,21 +586,24 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 
 		// Eagerly cache singletons to be able to resolve circular references
 		// even when triggered by lifecycle interfaces like BeanFactoryAware.
+
 		boolean earlySingletonExposure = (mbd.isSingleton() && this.allowCircularReferences &&
 				isSingletonCurrentlyInCreation(beanName));
-
 		if (earlySingletonExposure) {
 			if (logger.isTraceEnabled()) {
 				logger.trace("Eagerly caching bean '" + beanName +
 						"' to allow for resolving potential circular references");
 			}
+			// 避免后期循环依赖,提早曝光创建的bean并加入到addSingletonFactory中
 			addSingletonFactory(beanName, () -> getEarlyBeanReference(beanName, mbd, bean));
 		}
 
 		// Initialize the bean instance.
 		Object exposedObject = bean;
 		try {
+			// 给bean的实例填充属性,其中，可能存在依赖于其他bean的属性,然后递归初始化bean的依赖
 			populateBean(beanName, mbd, instanceWrapper);
+			// 调用初始化方法
 			exposedObject = initializeBean(beanName, exposedObject, mbd);
 		}
 		catch (Throwable ex) {

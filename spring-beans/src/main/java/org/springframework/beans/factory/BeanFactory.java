@@ -330,6 +330,8 @@ public interface BeanFactory {
 	 * @since 2.0.1
 	 * @see #getBean
 	 * @see #getType
+	 *
+	 * 判断给定的beanName对应的bean是否为指定的类型
 	 */
 	boolean isTypeMatch(String name, Class<?> typeToMatch) throws NoSuchBeanDefinitionException;
 

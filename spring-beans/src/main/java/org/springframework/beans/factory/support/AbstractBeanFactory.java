@@ -263,48 +263,53 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 		} else {
 			// Fail if we're already creating this bean instance:
 			// We're assumably within a circular reference.
+			// 判断该bean是否处于创建中
 			if (isPrototypeCurrentlyInCreation(beanName)) {
 				throw new BeanCurrentlyInCreationException(beanName);
 			}
 
 			// Check if bean definition exists in this factory.
 			BeanFactory parentBeanFactory = getParentBeanFactory();
+			// 父类的beanFactory不为null， 同时该beanFactory不包含此bean，从父类beanFactory中查找
 			if (parentBeanFactory != null && !containsBeanDefinition(beanName)) {
 				// Not found -> check parent.
 				String nameToLookup = originalBeanName(name);
 				if (parentBeanFactory instanceof AbstractBeanFactory) {
 					return ((AbstractBeanFactory) parentBeanFactory).doGetBean(
 							nameToLookup, requiredType, args, typeCheckOnly);
-				}
-				else if (args != null) {
+				} else if (args != null) {
 					// Delegation to parent with explicit args.
 					return (T) parentBeanFactory.getBean(nameToLookup, args);
-				}
-				else if (requiredType != null) {
+				} else if (requiredType != null) {
 					// No args -> delegate to standard getBean method.
 					return parentBeanFactory.getBean(nameToLookup, requiredType);
-				}
-				else {
+				} else {
 					return (T) parentBeanFactory.getBean(nameToLookup);
 				}
 			}
-
+			//如果不是仅仅做类型检查而是创建bean，设置
 			if (!typeCheckOnly) {
+				// 将beanName添加到alreadyCreated中，同时清除该bean的beanDefinition缓存
 				markBeanAsCreated(beanName);
 			}
 
 			try {
+				// 获取该bean的合并beanDefinition
 				final RootBeanDefinition mbd = getMergedLocalBeanDefinition(beanName);
+				// 判断该bean不是abstract类型的
 				checkMergedBeanDefinition(mbd, beanName, args);
 
 				// Guarantee initialization of beans that the current bean depends on.
+				// 保证当前bean所有依赖的bean都需要进行实例化
 				String[] dependsOn = mbd.getDependsOn();
 				if (dependsOn != null) {
 					for (String dep : dependsOn) {
+						// 判断所依赖的bean是否已经被注册到依赖中
 						if (isDependent(beanName, dep)) {
 							throw new BeanCreationException(mbd.getResourceDescription(), beanName,
 									"Circular depends-on relationship between '" + beanName + "' and '" + dep + "'");
 						}
+						// 注册依赖
 						registerDependentBean(dep, beanName);
 						try {
 							getBean(dep);
@@ -331,9 +336,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 						}
 					});
 					bean = getObjectForBeanInstance(sharedInstance, name, beanName, mbd);
-				}
-
-				else if (mbd.isPrototype()) {
+				} else if (mbd.isPrototype()) {
 					// It's a prototype -> create a new instance.
 					Object prototypeInstance = null;
 					try {
@@ -344,9 +347,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 						afterPrototypeCreation(beanName);
 					}
 					bean = getObjectForBeanInstance(prototypeInstance, name, beanName, mbd);
-				}
-
-				else {
+				} else {
 					String scopeName = mbd.getScope();
 					final Scope scope = this.scopes.get(scopeName);
 					if (scope == null) {
@@ -379,6 +380,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 		}
 
 		// Check if required type matches the type of the actual bean instance.
+		// 如果指定的type不是bean的类型，则进行转换
 		if (requiredType != null && !requiredType.isInstance(bean)) {
 			try {
 				T convertedBean = getTypeConverter().convertIfNecessary(bean, requiredType);
@@ -1305,6 +1307,9 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 	 * or {@code null} in case of a top-level bean
 	 * @return a (potentially merged) RootBeanDefinition for the given bean
 	 * @throws BeanDefinitionStoreException in case of an invalid bean definition
+	 *
+	 * 返回合并的beanDefinition，如果该bean没有父bean，则返回RootBeanDefinition
+	 * 否则返回beanDefinition的合并
 	 */
 	protected RootBeanDefinition getMergedBeanDefinition(
 			String beanName, BeanDefinition bd, @Nullable BeanDefinition containingBd)
@@ -1330,16 +1335,14 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 					else {
 						mbd = new RootBeanDefinition(bd);
 					}
-				}
-				else {
+				} else {
 					// Child bean definition: needs to be merged with parent.
 					BeanDefinition pbd;
 					try {
 						String parentBeanName = transformedBeanName(bd.getParentName());
 						if (!beanName.equals(parentBeanName)) {
 							pbd = getMergedBeanDefinition(parentBeanName);
-						}
-						else {
+						} else {
 							BeanFactory parent = getParentBeanFactory();
 							if (parent instanceof ConfigurableBeanFactory) {
 								pbd = ((ConfigurableBeanFactory) parent).getMergedBeanDefinition(parentBeanName);
@@ -1709,6 +1712,8 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 	 * <p>This allows the bean factory to optimize its caching for repeated
 	 * creation of the specified bean.
 	 * @param beanName the name of the bean
+	 *
+	 *
 	 */
 	protected void markBeanAsCreated(String beanName) {
 		if (!this.alreadyCreated.contains(beanName)) {
@@ -1783,6 +1788,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 			Object beanInstance, String name, String beanName, @Nullable RootBeanDefinition mbd) {
 
 		// Don't let calling code try to dereference the factory if the bean isn't a factory.
+		// 如果提供的name，是FactoryBean的话标识然后返回
 		if (BeanFactoryUtils.isFactoryDereference(name)) {
 			if (beanInstance instanceof NullBean) {
 				return beanInstance;
@@ -1799,6 +1805,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 		// Now we have the bean instance, which may be a normal bean or a FactoryBean.
 		// If it's a FactoryBean, we use it to create a bean instance, unless the
 		// caller actually wants a reference to the factory.
+		// 如果不是FactoryBean直接返回
 		if (!(beanInstance instanceof FactoryBean)) {
 			return beanInstance;
 		}
@@ -1806,8 +1813,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 		Object object = null;
 		if (mbd != null) {
 			mbd.isFactoryBean = true;
-		}
-		else {
+		} else {
 			object = getCachedObjectForFactoryBean(beanName);
 		}
 		if (object == null) {
