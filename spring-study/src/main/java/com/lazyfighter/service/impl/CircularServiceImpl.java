@@ -5,18 +5,14 @@ import com.lazyfighter.service.HelloService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-/**
- * @author liping
- */
 @Service
-public class HelloServiceImpl implements HelloService {
+public class CircularServiceImpl implements CircularService {
 
 	@Autowired
-	private CircularService circularService;
+	private HelloService helloService;
 
 	@Override
-	public String sayHello(String name) {
-		System.out.println(circularService.getClass().getName());
-		return "hello " + name;
+	public void circular() {
+		System.out.println(helloService.hashCode());
 	}
 }

@@ -196,6 +196,7 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 	 */
 	@Nullable
 	protected Object getSingleton(String beanName, boolean allowEarlyReference) {
+		// 从一级缓存中获取
 		Object singletonObject = this.singletonObjects.get(beanName);
 		// 如果未完成bean的实例化，同时bean在创建中
 		if (singletonObject == null && isSingletonCurrentlyInCreation(beanName)) {
@@ -240,7 +241,7 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 				if (logger.isDebugEnabled()) {
 					logger.debug("Creating shared instance of singleton bean '" + beanName + "'");
 				}
-				// 判断bean是否在创建中，如果创建中抛出异常
+				// 判断bean是否在创建中，如果创建中抛出异常，同时缓存创建bean中的名字
 				beforeSingletonCreation(beanName);
 
 				boolean newSingleton = false;
