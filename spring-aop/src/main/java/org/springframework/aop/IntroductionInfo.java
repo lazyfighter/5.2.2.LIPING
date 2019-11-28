@@ -27,6 +27,8 @@ package org.springframework.aop;
  *
  * @author Rod Johnson
  * @since 1.1.1
+ *
+ *
  */
 public interface IntroductionInfo {
 

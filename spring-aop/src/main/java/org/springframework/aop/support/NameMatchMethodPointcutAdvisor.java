@@ -28,6 +28,8 @@ import org.springframework.aop.Pointcut;
  * @author Juergen Hoeller
  * @author Rob Harrop
  * @see NameMatchMethodPointcut
+ *
+ * advisor是advice与pointcut的集合，此类为按照名称匹配的pointcut
  */
 @SuppressWarnings("serial")
 public class NameMatchMethodPointcutAdvisor extends AbstractGenericPointcutAdvisor {

@@ -80,6 +80,8 @@ import org.springframework.util.StringUtils;
  * @author Ramnivas Laddad
  * @author Dave Syer
  * @since 2.0
+ *
+ * 因为同时实现了ClassFilter、IntroductionAwareMethodMatcher因此他本身就是
  */
 @SuppressWarnings("serial")
 public class AspectJExpressionPointcut extends AbstractExpressionPointcut

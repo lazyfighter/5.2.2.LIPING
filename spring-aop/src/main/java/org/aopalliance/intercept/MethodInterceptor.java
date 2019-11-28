@@ -51,6 +51,8 @@ public interface MethodInterceptor extends Interceptor {
 	 * might be intercepted by the interceptor
 	 * @throws Throwable if the interceptors or the target object
 	 * throws an exception
+	 *
+	 * 可以实现方法调用时的通知，
 	 */
 	Object invoke(MethodInvocation invocation) throws Throwable;
 

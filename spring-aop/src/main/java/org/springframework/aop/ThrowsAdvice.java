@@ -47,6 +47,10 @@ package org.springframework.aop;
  * @author Juergen Hoeller
  * @see AfterReturningAdvice
  * @see MethodBeforeAdvice
+ *
+ * 可以实现在抛出异常的时候通知，
+ * void afterThrowing([Method, args, target], ThrowableSubclass);
+ * 需要实现方法，前三个参数可以选择，后一个为必须Throwable的子类
  */
 public interface ThrowsAdvice extends AfterAdvice {
 

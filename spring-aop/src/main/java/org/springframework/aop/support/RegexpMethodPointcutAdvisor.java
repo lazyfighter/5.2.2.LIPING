@@ -41,6 +41,10 @@ import org.springframework.util.ObjectUtils;
  * @see #setPattern
  * @see #setPatterns
  * @see JdkRegexpMethodPointcut
+ *
+ *
+ * 按照正则表达式advisor，
+ * advice与pointcut的集合
  */
 @SuppressWarnings("serial")
 public class RegexpMethodPointcutAdvisor extends AbstractGenericPointcutAdvisor {

@@ -85,6 +85,7 @@ class AspectJPrecedenceComparator implements Comparator<Advisor> {
 		return advisorPrecedence;
 	}
 
+	// TODO
 	private int comparePrecedenceWithinAspect(Advisor advisor1, Advisor advisor2) {
 		boolean oneOrOtherIsAfterAdvice =
 				(AspectJAopUtils.isAfterAdvice(advisor1) || AspectJAopUtils.isAfterAdvice(advisor2));
@@ -120,23 +121,27 @@ class AspectJPrecedenceComparator implements Comparator<Advisor> {
 		}
 	}
 
+	// 判断连个切面名称是否相同
 	private boolean declaredInSameAspect(Advisor advisor1, Advisor advisor2) {
 		return (hasAspectName(advisor1) && hasAspectName(advisor2) &&
 				getAspectName(advisor1).equals(getAspectName(advisor2)));
 	}
 
+	// 判断切面是否有名称
 	private boolean hasAspectName(Advisor anAdvisor) {
 		return (anAdvisor instanceof AspectJPrecedenceInformation ||
 				anAdvisor.getAdvice() instanceof AspectJPrecedenceInformation);
 	}
 
 	// pre-condition is that hasAspectName returned true
+	// 获取切面名称
 	private String getAspectName(Advisor anAdvisor) {
 		AspectJPrecedenceInformation pi = AspectJAopUtils.getAspectJPrecedenceInformationFor(anAdvisor);
 		Assert.state(pi != null, "Unresolvable precedence information");
 		return pi.getAspectName();
 	}
 
+	// 获取切面排序
 	private int getAspectDeclarationOrder(Advisor anAdvisor) {
 		AspectJPrecedenceInformation precedenceInfo =
 			AspectJAopUtils.getAspectJPrecedenceInformationFor(anAdvisor);

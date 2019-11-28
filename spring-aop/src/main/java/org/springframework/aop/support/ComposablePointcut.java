@@ -40,6 +40,8 @@ import org.springframework.util.Assert;
  * @author Rob Harrop
  * @since 11.11.2003
  * @see Pointcuts
+ *
+ * 切入点合并，类似于或者的关系，可以指定多个切入点
  */
 public class ComposablePointcut implements Pointcut, Serializable {
 

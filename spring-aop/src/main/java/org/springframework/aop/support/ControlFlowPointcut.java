@@ -36,6 +36,9 @@ import org.springframework.util.ObjectUtils;
  * @author Rob Harrop
  * @author Juergen Hoeller
  * @author Sam Brannen
+ *
+ * 流程切入点，我们一般提供的接入点都是基于方法或者类，但是有时候我们只想某个类调用的时候在切入
+ * 采用这个，可以指定调用者的class 以及 调用方法
  */
 @SuppressWarnings("serial")
 public class ControlFlowPointcut implements Pointcut, ClassFilter, MethodMatcher, Serializable {

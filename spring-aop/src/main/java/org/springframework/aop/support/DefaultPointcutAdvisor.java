@@ -53,6 +53,8 @@ public class DefaultPointcutAdvisor extends AbstractGenericPointcutAdvisor imple
 	 * Create a DefaultPointcutAdvisor that matches all methods.
 	 * <p>{@code Pointcut.TRUE} will be used as Pointcut.
 	 * @param advice the Advice to use
+	 *
+	 *  若没有指定advice,默认Pointcut.TRUE，也就是说会匹配所有的方法的执行
 	 */
 	public DefaultPointcutAdvisor(Advice advice) {
 		this(Pointcut.TRUE, advice);

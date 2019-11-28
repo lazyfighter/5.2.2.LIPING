@@ -35,6 +35,7 @@ public class AnnotationClassFilter implements ClassFilter {
 
 	private final Class<? extends Annotation> annotationType;
 
+	// 表示继承过来得注解也算
 	private final boolean checkInherited;
 
 

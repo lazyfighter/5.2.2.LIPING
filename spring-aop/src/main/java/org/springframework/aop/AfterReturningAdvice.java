@@ -40,6 +40,8 @@ public interface AfterReturningAdvice extends AfterAdvice {
 	 * Any exception thrown will be returned to the caller if it's
 	 * allowed by the method signature. Otherwise the exception
 	 * will be wrapped as a runtime exception.
+	 *
+	 * 可以实现在方法返回时的通知
 	 */
 	void afterReturning(@Nullable Object returnValue, Method method, Object[] args, @Nullable Object target) throws Throwable;
 

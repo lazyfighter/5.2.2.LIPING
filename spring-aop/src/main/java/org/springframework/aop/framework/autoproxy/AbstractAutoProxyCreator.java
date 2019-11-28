@@ -88,6 +88,11 @@ import org.springframework.util.StringUtils;
  * @see #getAdvicesAndAdvisorsForBean
  * @see BeanNameAutoProxyCreator
  * @see DefaultAdvisorAutoProxyCreator
+ *
+ * ProxyProcessorSupport 负责管理classLoader 以及判断bean使用什么代理方式
+ * SmartInstantiationAwareBeanPostProcessor 可以暴露出代理的引用，替代原bean实例的引用
+ *
+ *
  */
 @SuppressWarnings("serial")
 public abstract class AbstractAutoProxyCreator extends ProxyProcessorSupport

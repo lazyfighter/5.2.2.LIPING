@@ -35,6 +35,8 @@ import org.springframework.util.Assert;
  * @since 2.0
  * @see AnnotationClassFilter
  * @see AnnotationMethodMatcher
+ *
+ * 注解切入点，可以指定注解作为切入点
  */
 public class AnnotationMatchingPointcut implements Pointcut {
 

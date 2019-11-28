@@ -34,6 +34,8 @@ import org.springframework.aop.TargetSource;
  * @author Juergen Hoeller
  * @since 13.03.2003
  * @see org.springframework.aop.framework.AdvisedSupport
+ *
+ * 用来承载一个proxy相关配置接口
  */
 public interface Advised extends TargetClassAware {
 

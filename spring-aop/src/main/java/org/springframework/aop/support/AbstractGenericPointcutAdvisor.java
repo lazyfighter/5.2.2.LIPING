@@ -26,6 +26,9 @@ import org.aopalliance.aop.Advice;
  * @since 2.0
  * @see #setAdvice
  * @see DefaultPointcutAdvisor
+ *
+ * 由于此类集成了AbstractPointcutAdvisor ，同时自身又advice的保存，
+ * 因此它的子类可以直接获得pointCut和advice
  */
 @SuppressWarnings("serial")
 public abstract class AbstractGenericPointcutAdvisor extends AbstractPointcutAdvisor {
