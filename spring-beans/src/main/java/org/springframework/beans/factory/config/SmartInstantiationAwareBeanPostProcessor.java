@@ -60,6 +60,8 @@ public interface SmartInstantiationAwareBeanPostProcessor extends InstantiationA
 	 * @param beanName the name of the bean
 	 * @return the candidate constructors, or {@code null} if none specified
 	 * @throws org.springframework.beans.BeansException in case of errors
+	 *
+	 * 通过反射返回bean的所有构造器
 	 */
 	@Nullable
 	default Constructor<?>[] determineCandidateConstructors(Class<?> beanClass, String beanName)
@@ -88,6 +90,9 @@ public interface SmartInstantiationAwareBeanPostProcessor extends InstantiationA
 	 * @return the object to expose as bean reference
 	 * (typically with the passed-in bean instance as default)
 	 * @throws org.springframework.beans.BeansException in case of errors
+	 *
+	 * 获取bean的引用，用来解决循环引用问题，同时如果配置AOP可以暴露出proxy的引用
+	 *
 	 */
 	default Object getEarlyBeanReference(Object bean, String beanName) throws BeansException {
 		return bean;

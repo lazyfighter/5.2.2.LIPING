@@ -79,6 +79,8 @@ public class BeanFactoryAspectJAdvisorsBuilder {
 	 * <p>Creates a Spring Advisor for each AspectJ advice method.
 	 * @return the list of {@link org.springframework.aop.Advisor} beans
 	 * @see #isEligibleBean
+	 *
+	 * 获取所有bean ，然后判断是否有@AspectJ注解，然后根据注解相关配置，创建advisor
 	 */
 	public List<Advisor> buildAspectJAdvisors() {
 		List<String> aspectNames = this.aspectBeanNames;
@@ -107,8 +109,10 @@ public class BeanFactoryAspectJAdvisorsBuilder {
 							if (amd.getAjType().getPerClause().getKind() == PerClauseKind.SINGLETON) {
 								MetadataAwareAspectInstanceFactory factory =
 										new BeanFactoryAspectInstanceFactory(this.beanFactory, beanName);
+								// 根据AspectJ元数据，构造所有的advisor
 								List<Advisor> classAdvisors = this.advisorFactory.getAdvisors(factory);
 								if (this.beanFactory.isSingleton(beanName)) {
+									// 缓存advisor信息
 									this.advisorsCache.put(beanName, classAdvisors);
 								}
 								else {

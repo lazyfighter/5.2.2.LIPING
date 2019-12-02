@@ -35,6 +35,8 @@ import org.springframework.util.ObjectUtils;
  * @since 4.1
  * @see AbstractAdvisingBeanPostProcessor
  * @see org.springframework.aop.framework.autoproxy.AbstractAutoProxyCreator
+ *
+ * AOP基础类，管理classLoader，以及判断bean通过哪种类型的反射，cglib还是jdkDynamic
  */
 @SuppressWarnings("serial")
 public class ProxyProcessorSupport extends ProxyConfig implements Ordered, BeanClassLoaderAware, AopInfrastructureBean {

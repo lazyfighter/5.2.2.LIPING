@@ -24,11 +24,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
-
 import org.aopalliance.aop.Advice;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.springframework.aop.Advisor;
 import org.springframework.aop.Pointcut;
 import org.springframework.aop.TargetSource;
@@ -92,7 +90,7 @@ import org.springframework.util.StringUtils;
  * ProxyProcessorSupport 负责管理classLoader 以及判断bean使用什么代理方式
  * SmartInstantiationAwareBeanPostProcessor 可以暴露出代理的引用，替代原bean实例的引用
  *
- *
+ * 负责代理的具体创建this#getEarlyBeanReference
  */
 @SuppressWarnings("serial")
 public abstract class AbstractAutoProxyCreator extends ProxyProcessorSupport
@@ -335,6 +333,9 @@ public abstract class AbstractAutoProxyCreator extends ProxyProcessorSupport
 	 * @param beanName the name of the bean
 	 * @param cacheKey the cache key for metadata access
 	 * @return a proxy wrapping the bean, or the raw bean instance as-is
+	 *
+	 * 判断是否用advisor可以应用到该bean上，如果有创建代理对象，暴露代理
+	 * 如果没有返回原bean
 	 */
 	protected Object wrapIfNecessary(Object bean, String beanName, Object cacheKey) {
 		if (StringUtils.hasLength(beanName) && this.targetSourcedBeans.contains(beanName)) {
@@ -348,13 +349,14 @@ public abstract class AbstractAutoProxyCreator extends ProxyProcessorSupport
 			return bean;
 		}
 
-		// Create proxy if we have advice.
+		// Create proxy if we have advice. 获取可以应用到该bean上面的advisor
 		Object[] specificInterceptors = getAdvicesAndAdvisorsForBean(bean.getClass(), beanName, null);
 		if (specificInterceptors != DO_NOT_PROXY) {
 			this.advisedBeans.put(cacheKey, Boolean.TRUE);
 			Object proxy = createProxy(
 					bean.getClass(), beanName, specificInterceptors, new SingletonTargetSource(bean));
 			this.proxyTypes.put(cacheKey, proxy.getClass());
+			logger.info("wrap bean:" + bean.getClass() + " return proxy");
 			return proxy;
 		}
 
@@ -446,7 +448,7 @@ public abstract class AbstractAutoProxyCreator extends ProxyProcessorSupport
 	 */
 	protected Object createProxy(Class<?> beanClass, @Nullable String beanName,
 			@Nullable Object[] specificInterceptors, TargetSource targetSource) {
-
+		// 设置proxy bean的属性
 		if (this.beanFactory instanceof ConfigurableListableBeanFactory) {
 			AutoProxyUtils.exposeTargetClass((ConfigurableListableBeanFactory) this.beanFactory, beanName, beanClass);
 		}

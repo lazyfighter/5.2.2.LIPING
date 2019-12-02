@@ -45,6 +45,8 @@ import org.springframework.util.Assert;
  * @author Rod Johnson
  * @author Juergen Hoeller
  * @see #findCandidateAdvisors
+ *
+ * 根据bean获取bean的advisor
  */
 @SuppressWarnings("serial")
 public abstract class AbstractAdvisorAutoProxyCreator extends AbstractAutoProxyCreator {
@@ -63,6 +65,7 @@ public abstract class AbstractAdvisorAutoProxyCreator extends AbstractAutoProxyC
 		initBeanFactory((ConfigurableListableBeanFactory) beanFactory);
 	}
 
+	// 父类只初始化了advisorRetrievalHelper， 子类还会有不通的初始化
 	protected void initBeanFactory(ConfigurableListableBeanFactory beanFactory) {
 		this.advisorRetrievalHelper = new BeanFactoryAdvisorRetrievalHelperAdapter(beanFactory);
 	}
@@ -91,7 +94,9 @@ public abstract class AbstractAdvisorAutoProxyCreator extends AbstractAutoProxyC
 	 * @see #extendAdvisors
 	 */
 	protected List<Advisor> findEligibleAdvisors(Class<?> beanClass, String beanName) {
+		// 获取所有的advisor
 		List<Advisor> candidateAdvisors = findCandidateAdvisors();
+		// 判断advisor是否可以应用到该bean上
 		List<Advisor> eligibleAdvisors = findAdvisorsThatCanApply(candidateAdvisors, beanClass, beanName);
 		extendAdvisors(eligibleAdvisors);
 		if (!eligibleAdvisors.isEmpty()) {
@@ -103,6 +108,8 @@ public abstract class AbstractAdvisorAutoProxyCreator extends AbstractAutoProxyC
 	/**
 	 * Find all candidate Advisors to use in auto-proxying.
 	 * @return the List of candidate Advisors
+	 *
+	 * 获取所有的advisors
 	 */
 	protected List<Advisor> findCandidateAdvisors() {
 		Assert.state(this.advisorRetrievalHelper != null, "No BeanFactoryAdvisorRetrievalHelper available");

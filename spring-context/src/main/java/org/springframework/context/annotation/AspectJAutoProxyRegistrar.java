@@ -30,6 +30,8 @@ import org.springframework.core.type.AnnotationMetadata;
  * @author Juergen Hoeller
  * @since 3.1
  * @see EnableAspectJAutoProxy
+ *
+ * 注册org.springframework.aop.config.internalAutoProxyCreator到beanFactory中
  */
 class AspectJAutoProxyRegistrar implements ImportBeanDefinitionRegistrar {
 
@@ -42,14 +44,20 @@ class AspectJAutoProxyRegistrar implements ImportBeanDefinitionRegistrar {
 	public void registerBeanDefinitions(
 			AnnotationMetadata importingClassMetadata, BeanDefinitionRegistry registry) {
 
+		// 向beanFactory中注册AnnotationAwareAspectJAutoProxyCreator.class ，用来自动构建proxy对象，达到AOP
 		AopConfigUtils.registerAspectJAnnotationAutoProxyCreatorIfNecessary(registry);
 
+		// 获取注解中的配置，向beanDefinition中设置配置
 		AnnotationAttributes enableAspectJAutoProxy =
 				AnnotationConfigUtils.attributesFor(importingClassMetadata, EnableAspectJAutoProxy.class);
+
 		if (enableAspectJAutoProxy != null) {
+			// 是否直接使用cglib作为AOP的实现，默认为false使用java标准的proxy
 			if (enableAspectJAutoProxy.getBoolean("proxyTargetClass")) {
 				AopConfigUtils.forceAutoProxyCreatorToUseClassProxying(registry);
 			}
+			// TODO 具体逻辑 是否暴露代理，proxy中调用另一个对象的方法，如果暴露代理，则通过获取对象代理进行调用，因此调用也会触发AOP相关的advise
+			// 如果不暴露代理，则直接进行方法调用不会触发AOP相关的advise
 			if (enableAspectJAutoProxy.getBoolean("exposeProxy")) {
 				AopConfigUtils.forceAutoProxyCreatorToExposeProxy(registry);
 			}

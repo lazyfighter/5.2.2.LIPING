@@ -45,6 +45,8 @@ import org.springframework.util.Assert;
  * @author Juergen Hoeller
  * @since 2.0
  * @see org.springframework.aop.aspectj.annotation.AspectJAdvisorFactory
+ *
+ * 处理@AspectJ注解
  */
 @SuppressWarnings("serial")
 public class AnnotationAwareAspectJAutoProxyCreator extends AspectJAwareAdvisorAutoProxyCreator {
@@ -75,9 +77,13 @@ public class AnnotationAwareAspectJAutoProxyCreator extends AspectJAwareAdvisorA
 		this.aspectJAdvisorFactory = aspectJAdvisorFactory;
 	}
 
+
+	// 重写父类的initBeanFactory方法来完成扩展
 	@Override
 	protected void initBeanFactory(ConfigurableListableBeanFactory beanFactory) {
+		// 调用父类的方法完成父类的初始化操作
 		super.initBeanFactory(beanFactory);
+		// 扩展操作
 		if (this.aspectJAdvisorFactory == null) {
 			this.aspectJAdvisorFactory = new ReflectiveAspectJAdvisorFactory(beanFactory);
 		}
@@ -116,12 +122,16 @@ public class AnnotationAwareAspectJAutoProxyCreator extends AspectJAwareAdvisorA
 	 * <p>If no &lt;aop:include&gt; elements were used then "includePatterns" will be
 	 * {@code null} and all beans are included. If "includePatterns" is non-null,
 	 * then one of the patterns must match.
+	 *
+	 * 判断给定的beanName是否符合 auto-proxying，
+	 *
 	 */
 	protected boolean isEligibleAspectBean(String beanName) {
+		// 如果没有匹配表达式，则全部符合
 		if (this.includePatterns == null) {
 			return true;
-		}
-		else {
+		} else {
+			// 如果有按照表达式进行匹配
 			for (Pattern pattern : this.includePatterns) {
 				if (pattern.matcher(beanName).matches()) {
 					return true;
