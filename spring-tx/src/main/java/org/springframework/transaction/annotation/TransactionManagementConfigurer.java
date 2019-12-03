@@ -43,6 +43,8 @@ import org.springframework.transaction.TransactionManager;
  * @see org.springframework.context.annotation.Primary
  * @see org.springframework.transaction.PlatformTransactionManager
  * @see org.springframework.transaction.ReactiveTransactionManager
+ *
+ * 实现该接口意味着，当有多个 TransactionManagement的时候，方法annotationDrivenTransactionManager()返回的是默认的management
  */
 public interface TransactionManagementConfigurer {
 

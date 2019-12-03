@@ -48,12 +48,16 @@ import org.springframework.util.ClassUtils;
  * @author Rod Johnson
  * @author Juergen Hoeller
  * @since 1.1
+ *
+ * 事务TransactionAttribute获取接口
  */
 public abstract class AbstractFallbackTransactionAttributeSource implements TransactionAttributeSource {
 
 	/**
 	 * Canonical value held in cache to indicate no transaction attribute was
 	 * found for this method, and we don't need to look again.
+	 *
+	 * 默认的事务config，rollback for runtimeException 以及 error
 	 */
 	@SuppressWarnings("serial")
 	private static final TransactionAttribute NULL_TRANSACTION_ATTRIBUTE = new DefaultTransactionAttribute() {
@@ -86,6 +90,8 @@ public abstract class AbstractFallbackTransactionAttributeSource implements Tran
 	 * @param targetClass the target class for this invocation (may be {@code null})
 	 * @return a TransactionAttribute for this method, or {@code null} if the method
 	 * is not transactional
+	 *
+	 * 获取具体的事务配置信息
 	 */
 	@Override
 	@Nullable
@@ -106,8 +112,7 @@ public abstract class AbstractFallbackTransactionAttributeSource implements Tran
 			else {
 				return cached;
 			}
-		}
-		else {
+		} else {
 			// We need to work it out.
 			TransactionAttribute txAttr = computeTransactionAttribute(method, targetClass);
 			// Put it in the cache.

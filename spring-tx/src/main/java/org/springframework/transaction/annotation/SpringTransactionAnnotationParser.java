@@ -35,6 +35,8 @@ import org.springframework.transaction.interceptor.TransactionAttribute;
  *
  * @author Juergen Hoeller
  * @since 2.5
+ *
+ * TransactionAnnotationParser的spring默认实现能够根据@Transactional的配置信息，解析获取transactionAttr
  */
 @SuppressWarnings("serial")
 public class SpringTransactionAnnotationParser implements TransactionAnnotationParser, Serializable {

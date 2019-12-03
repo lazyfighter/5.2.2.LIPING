@@ -5,5 +5,9 @@ apply plugin: "java"
 dependencies {
 	compile(project(":spring-context"))
 	compile(project(":spring-aop"))
+	compile(project(":spring-beans"))
+	compile(project(":spring-tx"))
+	compile(project(":spring-jdbc"))
+	compile(project(":spring-core"))
 	optional("org.aspectj:aspectjweaver")
 }

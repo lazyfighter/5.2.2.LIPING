@@ -27,6 +27,8 @@ import org.springframework.util.StringUtils;
  * @author Rod Johnson
  * @author Juergen Hoeller
  * @since 16.03.2003
+ *
+ * 事务属性config类，事务回滚判断Rolls back on runtime, but not checked, exceptions by default.
  */
 @SuppressWarnings("serial")
 public class DefaultTransactionAttribute extends DefaultTransactionDefinition implements TransactionAttribute {
@@ -129,6 +131,8 @@ public class DefaultTransactionAttribute extends DefaultTransactionDefinition im
 	 * (a corner case). For declarative transactions, we expect checked exceptions to be
 	 * intentionally declared as business exceptions, leading to a commit by default.
 	 * @see org.springframework.transaction.support.TransactionTemplate#execute
+	 *
+	 * 如果为运行时异常或者虚拟机异常则进行回滚，注意checkedException不再其中
 	 */
 	@Override
 	public boolean rollbackOn(Throwable ex) {

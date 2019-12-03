@@ -34,6 +34,8 @@ import org.springframework.util.ObjectUtils;
  * @since 15.10.2003
  * @see org.springframework.transaction.interceptor.TransactionProxyFactoryBean
  * @see org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator
+ *
+ * 总是返回相同的transactionAttribute， 默认为DefaultTransactionAttribute
  */
 @SuppressWarnings("serial")
 public class MatchAlwaysTransactionAttributeSource implements TransactionAttributeSource, Serializable {

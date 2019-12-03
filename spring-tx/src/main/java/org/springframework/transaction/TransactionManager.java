@@ -24,6 +24,8 @@ package org.springframework.transaction;
  * @since 5.2
  * @see PlatformTransactionManager
  * @see ReactiveTransactionManager
+ *
+ * 事务管理器，负责事务的创建、提交、回滚
  */
 public interface TransactionManager {
 

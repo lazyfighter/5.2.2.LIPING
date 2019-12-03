@@ -32,6 +32,8 @@ import org.springframework.transaction.TransactionDefinition;
  *
  * @author Juergen Hoeller
  * @since 08.05.2003
+ *
+ * TransactionDefinition为一个常量池定义了事务的属性，DefaultTransactionDefinition提供了各个属性的set get方法
  */
 @SuppressWarnings("serial")
 public class DefaultTransactionDefinition implements TransactionDefinition, Serializable {

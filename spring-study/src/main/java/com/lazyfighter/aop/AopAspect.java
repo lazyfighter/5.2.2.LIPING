@@ -8,9 +8,9 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.stereotype.Component;
 
-@EnableAspectJAutoProxy
-@Component
-@Aspect
+//@EnableAspectJAutoProxy
+//@Component
+//@Aspect
 public class AopAspect {
 
 

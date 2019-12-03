@@ -28,6 +28,8 @@ import org.springframework.util.Assert;
  *
  * @author Juergen Hoeller
  * @since 2.0
+ *
+ * 综合TransactionAttributeSource，合并多个TransactionAttributeSource
  */
 @SuppressWarnings("serial")
 public class CompositeTransactionAttributeSource implements TransactionAttributeSource, Serializable {

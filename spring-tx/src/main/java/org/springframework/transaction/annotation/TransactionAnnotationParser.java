@@ -63,6 +63,8 @@ public interface TransactionAnnotationParser {
 	 * @param element the annotated method or class
 	 * @return the configured transaction attribute, or {@code null} if none found
 	 * @see AnnotationTransactionAttributeSource#determineTransactionAttribute
+	 *
+	 * 根据方法 或者类上面的注解获取transcation的config
 	 */
 	@Nullable
 	TransactionAttribute parseTransactionAnnotation(AnnotatedElement element);

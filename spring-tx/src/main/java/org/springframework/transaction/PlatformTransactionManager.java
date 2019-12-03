@@ -66,6 +66,8 @@ public interface PlatformTransactionManager extends TransactionManager {
 	 * @see TransactionDefinition#getIsolationLevel
 	 * @see TransactionDefinition#getTimeout
 	 * @see TransactionDefinition#isReadOnly
+	 *
+	 * 根据事务定义TransactionDefinition，获取事务
 	 */
 	TransactionStatus getTransaction(@Nullable TransactionDefinition definition)
 			throws TransactionException;
@@ -96,6 +98,8 @@ public interface PlatformTransactionManager extends TransactionManager {
 	 * @throws IllegalTransactionStateException if the given transaction
 	 * is already completed (that is, committed or rolled back)
 	 * @see TransactionStatus#setRollbackOnly
+	 *
+	 * 提交事务
 	 */
 	void commit(TransactionStatus status) throws TransactionException;
 
@@ -114,6 +118,8 @@ public interface PlatformTransactionManager extends TransactionManager {
 	 * (typically caused by fundamental resource failures)
 	 * @throws IllegalTransactionStateException if the given transaction
 	 * is already completed (that is, committed or rolled back)
+	 *
+	 * 回滚事务
 	 */
 	void rollback(TransactionStatus status) throws TransactionException;
 

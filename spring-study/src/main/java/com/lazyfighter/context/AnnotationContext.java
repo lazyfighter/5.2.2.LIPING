@@ -1,6 +1,8 @@
 package com.lazyfighter.context;
 
 import com.lazyfighter.service.HelloService;
+import com.lazyfighter.service.TransactionService;
+import com.lazyfighter.service.impl.TransactionServiceImpl;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 /**
@@ -12,8 +14,12 @@ public class AnnotationContext {
 		AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext();
 		applicationContext.scan("com.lazyfighter");
 		applicationContext.refresh();
-		HelloService helloService = applicationContext.getBean(HelloService.class);
-		helloService.sayHello("world");
+		try {
+			TransactionService transactionService = applicationContext.getBean(TransactionService.class);
+			transactionService.insert();
+		}catch (Exception e) {
+			System.out.println(e);
+		}
 	}
 
 }

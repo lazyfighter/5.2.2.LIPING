@@ -22,6 +22,8 @@ package org.springframework.transaction;
  * @author Juergen Hoeller
  * @since 5.2
  * @see TransactionDefinition#withDefaults()
+ *
+ * 默认的事务config，无法修改
  */
 final class StaticTransactionDefinition implements TransactionDefinition {
 
