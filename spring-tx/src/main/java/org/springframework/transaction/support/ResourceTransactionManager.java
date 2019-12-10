@@ -43,6 +43,8 @@ public interface ResourceTransactionManager extends PlatformTransactionManager {
 	 * @return the target resource factory (never {@code null})
 	 * @see TransactionSynchronizationManager#bindResource
 	 * @see TransactionSynchronizationManager#getResource
+	 *
+	 * 返回具体的获取transaction依赖的数据源或者工厂类
 	 */
 	Object getResourceFactory();
 

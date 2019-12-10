@@ -58,6 +58,10 @@ import org.springframework.beans.BeansException;
  * @since 06.07.2003
  * @see BeanPostProcessor
  * @see PropertyResourceConfigurer
+ *
+ * applicationContext初始化的时候，第一补是扫描classpath下面的标记@Component以及它的派生注解类，然后加载到beanFactory中
+ * BeanFactoryPostProcessor提供的能力是可以修改这些beanFactoryPostProssor，同时它的实现类也可以完成一些额外的加载工作，
+ * 比如解析@Configuration注解类，注入@Configuration配置的bean
  */
 @FunctionalInterface
 public interface BeanFactoryPostProcessor {

@@ -26,6 +26,8 @@ import java.sql.Connection;
  * @since 1.1
  * @see SimpleConnectionHandle
  * @see ConnectionHolder
+ *
+ * 基础抽象接口处理数据库连接
  */
 @FunctionalInterface
 public interface ConnectionHandle {

@@ -41,6 +41,8 @@ import org.springframework.lang.Nullable;
  * @since 16.05.2003
  * @see org.springframework.transaction.support.TransactionTemplate
  * @see org.springframework.transaction.interceptor.TransactionInterceptor
+ *
+ * 抽象获取事务、提交事务、回滚事务
  */
 public interface PlatformTransactionManager extends TransactionManager {
 

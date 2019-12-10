@@ -168,6 +168,8 @@ public class ConnectionHolder extends ResourceHolderSupport {
 	 * Return whether JDBC 3.0 Savepoints are supported.
 	 * Caches the flag for the lifetime of this ConnectionHolder.
 	 * @throws SQLException if thrown by the JDBC driver
+	 *
+	 * 判断是否支持savepoint
 	 */
 	public boolean supportsSavepoints() throws SQLException {
 		if (this.savepointsSupported == null) {

@@ -264,6 +264,8 @@ public abstract class AbstractPlatformTransactionManager implements PlatformTran
 	 * with DataSourceTransactionManager, but not with JtaTransactionManager.
 	 * @see #setNestedTransactionAllowed
 	 * @see org.springframework.transaction.jta.JtaTransactionManager
+	 *
+	 * 是否全局回滚当失败的时候
 	 */
 	public final void setGlobalRollbackOnParticipationFailure(boolean globalRollbackOnParticipationFailure) {
 		this.globalRollbackOnParticipationFailure = globalRollbackOnParticipationFailure;
@@ -339,14 +341,16 @@ public abstract class AbstractPlatformTransactionManager implements PlatformTran
 	 * @see #doGetTransaction
 	 * @see #isExistingTransaction
 	 * @see #doBegin
+	 * @definition transaction的config
 	 */
 	@Override
 	public final TransactionStatus getTransaction(@Nullable TransactionDefinition definition)
 			throws TransactionException {
 
-		// Use defaults if no transaction definition given.
+		// 如果没有transaction的config采用spring内置默认的
 		TransactionDefinition def = (definition != null ? definition : TransactionDefinition.withDefaults());
 
+		// 获取transaction
 		Object transaction = doGetTransaction();
 		boolean debugEnabled = logger.isDebugEnabled();
 
@@ -1046,6 +1050,8 @@ public abstract class AbstractPlatformTransactionManager implements PlatformTran
 	 * @see #doCommit
 	 * @see #doRollback
 	 * @see DefaultTransactionStatus#getTransaction
+	 *
+	 * 模板模式
 	 */
 	protected abstract Object doGetTransaction() throws TransactionException;
 

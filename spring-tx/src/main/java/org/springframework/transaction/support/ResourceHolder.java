@@ -30,6 +30,8 @@ public interface ResourceHolder {
 
 	/**
 	 * Reset the transactional state of this holder.
+	 *
+	 * 重置transaction状态
 	 */
 	void reset();
 

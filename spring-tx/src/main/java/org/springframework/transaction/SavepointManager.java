@@ -18,7 +18,7 @@ package org.springframework.transaction;
 
 /**
  * Interface that specifies an API to programmatically manage transaction
- * savepoints in a generic fashion. Extended by TransactionStatus to
+ * savepoints in a generic fashion（通用的方式）. Extended by TransactionStatus to
  * expose savepoint management functionality for a specific transaction.
  *
  * <p>Note that savepoints can only work within an active transaction.
@@ -33,6 +33,9 @@ package org.springframework.transaction;
  * @see TransactionStatus
  * @see TransactionDefinition#PROPAGATION_NESTED
  * @see java.sql.Savepoint
+ *
+ * 事务保存点，可以通过创建事务保存点来达到回滚到指定的保存点
+ * mysql中：savepoint ***;
  */
 public interface SavepointManager {
 

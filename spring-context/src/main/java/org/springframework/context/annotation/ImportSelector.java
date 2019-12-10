@@ -53,6 +53,8 @@ import org.springframework.core.type.AnnotationMetadata;
  * @see Import
  * @see ImportBeanDefinitionRegistrar
  * @see Configuration
+ *
+ * 可以导入@Configuration对象，然后spring负责解析完成，基于此可以实现auto-config
  */
 public interface ImportSelector {
 

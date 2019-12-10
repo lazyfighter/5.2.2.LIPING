@@ -30,6 +30,8 @@ import java.io.Flushable;
  * @author Juergen Hoeller
  * @since 1.1
  * @see DefaultTransactionStatus#isRollbackOnly
+ *
+ * rollback-only marker
  */
 public interface SmartTransactionObject extends Flushable {
 

@@ -34,6 +34,10 @@ import org.springframework.lang.Nullable;
  * @author Phillip Webb
  * @author Stephane Nicoll
  * @since 4.0
+ *
+ * ImportSelector变异类区别：
+ * ImportSelector是在@Configuration类解析之前执行，也就是@Bean等注解解析之前执行
+ * DeferredImportSelector是在解析之后执行
  */
 public interface DeferredImportSelector extends ImportSelector {
 

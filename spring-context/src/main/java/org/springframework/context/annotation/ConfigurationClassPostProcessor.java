@@ -82,6 +82,8 @@ import org.springframework.util.ClassUtils;
  * @author Juergen Hoeller
  * @author Phillip Webb
  * @since 3.0
+ *
+ * BeanFactoryPostProcessor, 用来处理@Configuration类
  */
 public class ConfigurationClassPostProcessor implements BeanDefinitionRegistryPostProcessor,
 		PriorityOrdered, ResourceLoaderAware, BeanClassLoaderAware, EnvironmentAware {

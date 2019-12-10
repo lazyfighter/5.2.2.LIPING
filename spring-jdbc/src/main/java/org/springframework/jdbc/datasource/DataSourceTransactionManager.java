@@ -205,6 +205,10 @@ public class DataSourceTransactionManager extends AbstractPlatformTransactionMan
 	 * this strong enforcement needs to be applied explicitly, e.g. through this flag.
 	 * @since 4.3.7
 	 * @see #prepareTransactionalConnection
+	 *
+	 * 只读事务内，不能增加、修改、删除内容，否则报Cannot execute statement in a READ ONLY transaction。
+	 * 只读事务内，只能读取到执行时间点前的内容，期间修改的内容不能读取到。
+	 * 只读事务作为ORM框架优化执行的一个暗号，比如放弃加锁，或者flush never。
 	 */
 	public void setEnforceReadOnly(boolean enforceReadOnly) {
 		this.enforceReadOnly = enforceReadOnly;
