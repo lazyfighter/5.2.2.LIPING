@@ -69,6 +69,7 @@ public interface AutowireCapableBeanFactory extends BeanFactory {
 	 * @see #createBean
 	 * @see #autowire
 	 * @see #autowireBeanProperties
+	 * 常量，用于标识外部自动装配功能是否可用。但是此标识不影响正常的（基于注解的等）自动装配功能的使用
 	 */
 	int AUTOWIRE_NO = 0;
 
@@ -78,6 +79,7 @@ public interface AutowireCapableBeanFactory extends BeanFactory {
 	 * @see #createBean
 	 * @see #autowire
 	 * @see #autowireBeanProperties
+	 * 按照名称进行自动注入
 	 */
 	int AUTOWIRE_BY_NAME = 1;
 
@@ -87,6 +89,7 @@ public interface AutowireCapableBeanFactory extends BeanFactory {
 	 * @see #createBean
 	 * @see #autowire
 	 * @see #autowireBeanProperties
+	 * 按照类型进行自动注入
 	 */
 	int AUTOWIRE_BY_TYPE = 2;
 
@@ -95,6 +98,7 @@ public interface AutowireCapableBeanFactory extends BeanFactory {
 	 * can be satisfied (involves resolving the appropriate constructor).
 	 * @see #createBean
 	 * @see #autowire
+	 * 按照构造器进行自动注入
 	 */
 	int AUTOWIRE_CONSTRUCTOR = 3;
 
@@ -137,6 +141,7 @@ public interface AutowireCapableBeanFactory extends BeanFactory {
 	 * @param beanClass the class of the bean to create
 	 * @return the new bean instance
 	 * @throws BeansException if instantiation or wiring failed
+	 * 按照给定的class类型进行创建bean实例，同时会执行bean的初始化以及所有的BeanPostProcessor，以及按照注解进行注入
 	 */
 	<T> T createBean(Class<T> beanClass) throws BeansException;
 
@@ -149,6 +154,7 @@ public interface AutowireCapableBeanFactory extends BeanFactory {
 	 * use {@link #autowireBeanProperties} for those purposes.
 	 * @param existingBean the existing bean instance
 	 * @throws BeansException if wiring failed
+	 * 通过调用给定Bean的after-instantiation及bean property的post-processing接口，对bean进行注入
 	 */
 	void autowireBean(Object existingBean) throws BeansException;
 
@@ -168,6 +174,8 @@ public interface AutowireCapableBeanFactory extends BeanFactory {
 	 * if there is no bean definition with the given name
 	 * @throws BeansException if the initialization failed
 	 * @see #initializeBean
+	 *
+	 * 对给定的bean进行注入以及应用所有的postProcessors
 	 */
 	Object configureBean(Object existingBean, String beanName) throws BeansException;
 
@@ -192,6 +200,8 @@ public interface AutowireCapableBeanFactory extends BeanFactory {
 	 * @see #AUTOWIRE_BY_NAME
 	 * @see #AUTOWIRE_BY_TYPE
 	 * @see #AUTOWIRE_CONSTRUCTOR
+	 *
+	 * 构建bean实例，根据注入模式是两个方法autowire以及initializeBean的集合
 	 */
 	Object createBean(Class<?> beanClass, int autowireMode, boolean dependencyCheck) throws BeansException;
 
@@ -220,6 +230,8 @@ public interface AutowireCapableBeanFactory extends BeanFactory {
 	 * @see #initializeBean
 	 * @see #applyBeanPostProcessorsBeforeInitialization
 	 * @see #applyBeanPostProcessorsAfterInitialization
+	 *
+	 * 通过给定的class类型创建bean实例，同时按照注入模式进行注入
 	 */
 	Object autowire(Class<?> beanClass, int autowireMode, boolean dependencyCheck) throws BeansException;
 
@@ -240,6 +252,8 @@ public interface AutowireCapableBeanFactory extends BeanFactory {
 	 * @see #AUTOWIRE_BY_NAME
 	 * @see #AUTOWIRE_BY_TYPE
 	 * @see #AUTOWIRE_NO
+	 *
+	 * 按照名称或者类型进行注入bean的属性
 	 */
 	void autowireBeanProperties(Object existingBean, int autowireMode, boolean dependencyCheck)
 			throws BeansException;
@@ -265,6 +279,8 @@ public interface AutowireCapableBeanFactory extends BeanFactory {
 	 * if there is no bean definition with the given name
 	 * @throws BeansException if applying the property values failed
 	 * @see #autowireBeanProperties
+	 *
+	 * 将指定的beanName对应的bean注入到存在的bean中
 	 */
 	void applyBeanPropertyValues(Object existingBean, String beanName) throws BeansException;
 
@@ -284,6 +300,8 @@ public interface AutowireCapableBeanFactory extends BeanFactory {
 	 * @return the bean instance to use, either the original or a wrapped one
 	 * @throws BeansException if the initialization failed
 	 * @see #ORIGINAL_INSTANCE_SUFFIX
+	 *
+	 * 初始化bean，会调用所有的beanPostProcessors
 	 */
 	Object initializeBean(Object existingBean, String beanName) throws BeansException;
 
@@ -300,6 +318,8 @@ public interface AutowireCapableBeanFactory extends BeanFactory {
 	 * @throws BeansException if any post-processing failed
 	 * @see BeanPostProcessor#postProcessBeforeInitialization
 	 * @see #ORIGINAL_INSTANCE_SUFFIX
+	 *
+	 * 调用所有的BeanPostProcessor#postProcessBeforeInitialization方法，返回的bean有可能是个包装类
 	 */
 	Object applyBeanPostProcessorsBeforeInitialization(Object existingBean, String beanName)
 			throws BeansException;
@@ -317,6 +337,8 @@ public interface AutowireCapableBeanFactory extends BeanFactory {
 	 * @throws BeansException if any post-processing failed
 	 * @see BeanPostProcessor#postProcessAfterInitialization
 	 * @see #ORIGINAL_INSTANCE_SUFFIX
+	 *
+	 * 调用所有的BeanPostProcessor#postProcessAfterInitialization，返回的bean有可能是个包装类
 	 */
 	Object applyBeanPostProcessorsAfterInitialization(Object existingBean, String beanName)
 			throws BeansException;
@@ -328,6 +350,8 @@ public interface AutowireCapableBeanFactory extends BeanFactory {
 	 * <p>Any exception that arises during destruction should be caught
 	 * and logged instead of propagated to the caller of this method.
 	 * @param existingBean the bean instance to destroy
+	 *
+	 * 销毁指定的bean
 	 */
 	void destroyBean(Object existingBean);
 
@@ -348,6 +372,8 @@ public interface AutowireCapableBeanFactory extends BeanFactory {
 	 * @throws BeansException if the bean could not be created
 	 * @since 4.3.3
 	 * @see #getBean(Class)
+	 *
+	 * 父类BeanFactory#getBean的一个增强接口，返回的是NamedBeanHolder对象，提供bean的名称以及bean实例
 	 */
 	<T> NamedBeanHolder<T> resolveNamedBean(Class<T> requiredType) throws BeansException;
 
