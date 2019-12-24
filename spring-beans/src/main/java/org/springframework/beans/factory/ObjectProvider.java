@@ -38,7 +38,7 @@ import org.springframework.lang.Nullable;
  * @see BeanFactory#getBeanProvider
  * @see org.springframework.beans.factory.annotation.Autowired
  *
- * ObjectFactory的增强接口，提供更多方式的访问能力
+ * ObjectFactory的增强接口，提供更多方式的构造实例能力
  */
 public interface ObjectProvider<T> extends ObjectFactory<T>, Iterable<T> {
 
@@ -51,6 +51,9 @@ public interface ObjectProvider<T> extends ObjectFactory<T>, Iterable<T> {
 	 * @return an instance of the bean
 	 * @throws BeansException in case of creation errors
 	 * @see #getObject()
+	 *
+	 * 调用有参构造器进行实例化，args为参数
+	 *
 	 */
 	T getObject(Object... args) throws BeansException;
 
@@ -74,6 +77,8 @@ public interface ObjectProvider<T> extends ObjectFactory<T>, Iterable<T> {
 	 * @throws BeansException in case of creation errors
 	 * @since 5.0
 	 * @see #getIfAvailable()
+	 *
+	 * 提供一个supplier，如果为空的时候调用supplier
 	 */
 	default T getIfAvailable(Supplier<T> defaultSupplier) throws BeansException {
 		T dependency = getIfAvailable();
@@ -88,6 +93,8 @@ public interface ObjectProvider<T> extends ObjectFactory<T>, Iterable<T> {
 	 * @throws BeansException in case of creation errors
 	 * @since 5.0
 	 * @see #getIfAvailable()
+	 *
+	 * 提供一个consumer，如果存在获取然后调用consumer
 	 */
 	default void ifAvailable(Consumer<T> dependencyConsumer) throws BeansException {
 		T dependency = getIfAvailable();
@@ -103,6 +110,8 @@ public interface ObjectProvider<T> extends ObjectFactory<T>, Iterable<T> {
 	 * not unique (i.e. multiple candidates found with none marked as primary)
 	 * @throws BeansException in case of creation errors
 	 * @see #getObject()
+	 *
+	 * 返回实例，如果有多个实例，则返回标记@Primary的那个
 	 */
 	@Nullable
 	T getIfUnique() throws BeansException;

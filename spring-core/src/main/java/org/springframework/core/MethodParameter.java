@@ -463,6 +463,8 @@ public class MethodParameter {
 	 * @return a specific containing class (potentially a subclass of the
 	 * declaring class), or otherwise simply the declaring class itself
 	 * @see #getDeclaringClass()
+	 *
+	 * 返回包含该参数的class，如果没有指定则直接返回声明该参数的class
 	 */
 	public Class<?> getContainingClass() {
 		Class<?> containingClass = this.containingClass;
@@ -480,6 +482,8 @@ public class MethodParameter {
 	/**
 	 * Return the type of the method/constructor parameter.
 	 * @return the parameter type (never {@code null})
+	 *
+	 * 返回该方法的返回值类型
 	 */
 	public Class<?> getParameterType() {
 		Class<?> paramType = this.parameterType;
@@ -808,6 +812,8 @@ public class MethodParameter {
 	 * @param parameterIndex the index of the parameter
 	 * @return the corresponding MethodParameter instance
 	 * @since 5.0
+	 *
+	 * 根据可执行的方法或者构造器来构建MethodParameter
 	 */
 	public static MethodParameter forExecutable(Executable executable, int parameterIndex) {
 		if (executable instanceof Method) {
@@ -828,11 +834,18 @@ public class MethodParameter {
 	 * @param parameter the parameter descriptor
 	 * @return the corresponding MethodParameter instance
 	 * @since 5.0
+	 *
+	 * 根据指定的参数构建MethodParameter
 	 */
 	public static MethodParameter forParameter(Parameter parameter) {
 		return forExecutable(parameter.getDeclaringExecutable(), findParameterIndex(parameter));
 	}
 
+	/**
+	 * 根据给定的Parameter返回在方法的index位置
+	 * @param parameter 方法参数类
+	 * @return
+	 */
 	protected static int findParameterIndex(Parameter parameter) {
 		Executable executable = parameter.getDeclaringExecutable();
 		Parameter[] allParams = executable.getParameters();
@@ -853,6 +866,12 @@ public class MethodParameter {
 				"] does not match any parameter in the declaring executable");
 	}
 
+	/**
+	 * 校验给定的方法index是否合法
+	 * @param executable
+	 * @param parameterIndex
+	 * @return
+	 */
 	private static int validateIndex(Executable executable, int parameterIndex) {
 		int count = executable.getParameterCount();
 		Assert.isTrue(parameterIndex >= -1 && parameterIndex < count,

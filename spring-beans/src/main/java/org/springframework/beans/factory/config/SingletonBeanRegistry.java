@@ -31,6 +31,8 @@ import org.springframework.lang.Nullable;
  * @see ConfigurableBeanFactory
  * @see org.springframework.beans.factory.support.DefaultSingletonBeanRegistry
  * @see org.springframework.beans.factory.support.AbstractBeanFactory
+ *
+ * 单例bean注册中心
  */
 public interface SingletonBeanRegistry {
 
@@ -54,6 +56,8 @@ public interface SingletonBeanRegistry {
 	 * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet
 	 * @see org.springframework.beans.factory.DisposableBean#destroy
 	 * @see org.springframework.beans.factory.support.BeanDefinitionRegistry#registerBeanDefinition
+	 *
+	 * 注册单例bean
 	 */
 	void registerSingleton(String beanName, Object singletonObject);
 
@@ -69,6 +73,8 @@ public interface SingletonBeanRegistry {
 	 * @param beanName the name of the bean to look for
 	 * @return the registered singleton object, or {@code null} if none found
 	 * @see ConfigurableListableBeanFactory#getBeanDefinition
+	 *
+	 * 根据beanName获取单例bean
 	 */
 	@Nullable
 	Object getSingleton(String beanName);
@@ -94,6 +100,8 @@ public interface SingletonBeanRegistry {
 	 * @see #registerSingleton
 	 * @see org.springframework.beans.factory.ListableBeanFactory#containsBeanDefinition
 	 * @see org.springframework.beans.factory.BeanFactory#containsBean
+	 *
+	 * 判断是否存在beanName的单例bean
 	 */
 	boolean containsSingleton(String beanName);
 
@@ -108,6 +116,8 @@ public interface SingletonBeanRegistry {
 	 * @see #registerSingleton
 	 * @see org.springframework.beans.factory.support.BeanDefinitionRegistry#getBeanDefinitionNames
 	 * @see org.springframework.beans.factory.ListableBeanFactory#getBeanDefinitionNames
+	 *
+	 * 获取所有的单例bean名称
 	 */
 	String[] getSingletonNames();
 
@@ -122,6 +132,8 @@ public interface SingletonBeanRegistry {
 	 * @see #registerSingleton
 	 * @see org.springframework.beans.factory.support.BeanDefinitionRegistry#getBeanDefinitionCount
 	 * @see org.springframework.beans.factory.ListableBeanFactory#getBeanDefinitionCount
+	 *
+	 * 获取单例bean的数量
 	 */
 	int getSingletonCount();
 
@@ -129,6 +141,8 @@ public interface SingletonBeanRegistry {
 	 * Return the singleton mutex used by this registry (for external collaborators).
 	 * @return the mutex object (never {@code null})
 	 * @since 4.2
+	 *
+	 * 获取该注册中心需要的互斥锁
 	 */
 	Object getSingletonMutex();
 

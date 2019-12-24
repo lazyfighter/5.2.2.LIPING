@@ -122,7 +122,7 @@ public interface BeanFactory {
 	 * will return the factory, not the instance returned by the factory.
 	 *
 	 *
-	 * 用来区分FactoryBean以及实际的Bean，如果采用前缀&将返回factory如果直接使用name返回的事工厂生产的对象
+	 * 用来区分FactoryBean以及实际的Bean，如果采用前缀&将返回factory如果直接使用name返回的是工厂创建的对象
 	 */
 	String FACTORY_BEAN_PREFIX = "&";
 

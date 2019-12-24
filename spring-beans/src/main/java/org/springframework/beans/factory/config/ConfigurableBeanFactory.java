@@ -49,7 +49,8 @@ import org.springframework.util.StringValueResolver;
  * @see ConfigurableListableBeanFactory
  *
  *
- * 提供可配置的beanFactory
+ * ConfigurableBeanFactory 实现了层级接口，以及单例注册中心接口
+ *
  */
 public interface ConfigurableBeanFactory extends HierarchicalBeanFactory, SingletonBeanRegistry {
 
