@@ -109,11 +109,20 @@ public abstract class PlaceholderConfigurerSupport extends PropertyResourceConfi
 	@Nullable
 	protected String valueSeparator = DEFAULT_VALUE_SEPARATOR;
 
+	/**
+	 * 解析完成后的值是否trim
+	 */
 	protected boolean trimValues = false;
 
+	/**
+	 * 解析为null ，可以用此值代替
+	 */
 	@Nullable
 	protected String nullValue;
 
+	/**
+	 * 是否忽略无法解析的配置
+	 */
 	protected boolean ignoreUnresolvablePlaceholders = false;
 
 	@Nullable

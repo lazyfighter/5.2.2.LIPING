@@ -58,7 +58,7 @@ package org.springframework.core.env;
  *
  * @author Chris Beams
  * @since 3.1
- * @see PropertyResolver
+ * @see PropertyResolver  提供配置获取，以及占位符解析功能
  * @see EnvironmentCapable
  * @see ConfigurableEnvironment
  * @see AbstractEnvironment
@@ -67,6 +67,8 @@ package org.springframework.core.env;
  * @see org.springframework.context.ConfigurableApplicationContext#getEnvironment
  * @see org.springframework.context.ConfigurableApplicationContext#setEnvironment
  * @see org.springframework.context.support.AbstractApplicationContext#createEnvironment
+ *
+ * 提供了多个环境支持
  */
 public interface Environment extends PropertyResolver {
 

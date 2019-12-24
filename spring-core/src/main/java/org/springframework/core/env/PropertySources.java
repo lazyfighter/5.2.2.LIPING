@@ -28,6 +28,8 @@ import org.springframework.lang.Nullable;
  * @author Juergen Hoeller
  * @since 3.1
  * @see PropertySource
+ *
+ * 多个配置遍历接口
  */
 public interface PropertySources extends Iterable<PropertySource<?>> {
 

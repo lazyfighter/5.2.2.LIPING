@@ -38,6 +38,8 @@ import org.springframework.lang.Nullable;
  * @author Juergen Hoeller
  * @since 3.1
  * @see PropertySourcesPropertyResolver
+ *
+ * PropertySources接口，提供可遍历的propertySource
  */
 public class MutablePropertySources implements PropertySources {
 
@@ -109,6 +111,8 @@ public class MutablePropertySources implements PropertySources {
 	/**
 	 * Add the given property source object with precedence immediately higher
 	 * than the named relative property source.
+	 *
+	 * 在relativePropertySourceName之前插入propertySource
 	 */
 	public void addBefore(String relativePropertySourceName, PropertySource<?> propertySource) {
 		assertLegalRelativeAddition(relativePropertySourceName, propertySource);

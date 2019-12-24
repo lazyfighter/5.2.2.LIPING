@@ -48,6 +48,9 @@ import org.springframework.util.ObjectUtils;
  * @since 02.10.2003
  * @see PropertyOverrideConfigurer
  * @see PropertyPlaceholderConfigurer
+ *
+ *
+ * 提供加载配置，以及value值的convert服务，同时可以处理
  */
 public abstract class PropertyResourceConfigurer extends PropertiesLoaderSupport
 		implements BeanFactoryPostProcessor, PriorityOrdered {
@@ -77,9 +80,11 @@ public abstract class PropertyResourceConfigurer extends PropertiesLoaderSupport
 	@Override
 	public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
 		try {
+			// 加载本地配置以及持久化配置
 			Properties mergedProps = mergeProperties();
 
 			// Convert the merged properties, if necessary.
+			// 提供value属性的convert服务
 			convertProperties(mergedProps);
 
 			// Let the subclass process the properties.

@@ -162,6 +162,8 @@ import org.springframework.core.io.support.PropertySourceFactory;
  * @see org.springframework.core.env.PropertySource
  * @see org.springframework.core.env.ConfigurableEnvironment#getPropertySources()
  * @see org.springframework.core.env.MutablePropertySources
+ *
+ * 用来显示指定properties配置文件
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)

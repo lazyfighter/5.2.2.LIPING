@@ -61,6 +61,8 @@ import org.springframework.beans.factory.BeanInitializationException;
  * @since 12.03.2003
  * @see #convertPropertyValue
  * @see PropertyPlaceholderConfigurer
+ *
+ * 将配置属性添加到beanDefinition中，配置属性为 beanName.property = value
  */
 public class PropertyOverrideConfigurer extends PropertyResourceConfigurer {
 

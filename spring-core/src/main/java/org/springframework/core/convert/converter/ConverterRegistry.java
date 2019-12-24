@@ -22,6 +22,8 @@ package org.springframework.core.convert.converter;
  * @author Keith Donald
  * @author Juergen Hoeller
  * @since 3.0
+ *
+ * 类型转换注册中心，提供类型转换器
  */
 public interface ConverterRegistry {
 
@@ -50,6 +52,8 @@ public interface ConverterRegistry {
 	 * Add a ranged converter factory to this registry.
 	 * The convertible source/target type pair is derived from the ConverterFactory's parameterized types.
 	 * @throws IllegalArgumentException if the parameterized types could not be resolved
+	 *
+	 *
 	 */
 	void addConverterFactory(ConverterFactory<?, ?> factory);
 

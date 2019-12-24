@@ -68,6 +68,9 @@ import java.util.Map;
  * @since 3.1
  * @see StandardEnvironment
  * @see org.springframework.context.ConfigurableApplicationContext#getEnvironment
+ *
+ * 提供可配置的profile
+ * 以及配置解析、以及类型转换服务
  */
 public interface ConfigurableEnvironment extends Environment, ConfigurablePropertyResolver {
 

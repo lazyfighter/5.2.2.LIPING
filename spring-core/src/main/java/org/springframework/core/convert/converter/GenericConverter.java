@@ -44,6 +44,8 @@ import org.springframework.util.Assert;
  * @see Converter
  * @see ConverterFactory
  * @see ConditionalConverter
+ *
+ * 提供多种转换类型
  */
 public interface GenericConverter {
 

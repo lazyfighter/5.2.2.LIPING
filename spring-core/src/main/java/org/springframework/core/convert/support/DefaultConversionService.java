@@ -37,6 +37,9 @@ import org.springframework.lang.Nullable;
  * @author Juergen Hoeller
  * @author Stephane Nicoll
  * @since 3.1
+ *
+ *
+ * ConversionService的默认实现，注册了系统内建的多个converter
  */
 public class DefaultConversionService extends GenericConversionService {
 
@@ -83,6 +86,8 @@ public class DefaultConversionService extends GenericConversionService {
 	 * @param converterRegistry the registry of converters to add to
 	 * (must also be castable to ConversionService, e.g. being a {@link ConfigurableConversionService})
 	 * @throws ClassCastException if the given ConverterRegistry could not be cast to a ConversionService
+	 *
+	 * 注册系统内置的converter
 	 */
 	public static void addDefaultConverters(ConverterRegistry converterRegistry) {
 		addScalarConverters(converterRegistry);

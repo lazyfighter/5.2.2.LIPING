@@ -27,6 +27,8 @@ import org.springframework.lang.Nullable;
  *
  * @author Chris Beams
  * @since 3.1
+ *
+ * 提供解析站位符时，设置前缀以及后缀，同时可以进行转换服务
  */
 public interface ConfigurablePropertyResolver extends PropertyResolver {
 

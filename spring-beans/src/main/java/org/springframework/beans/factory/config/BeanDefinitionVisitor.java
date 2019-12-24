@@ -44,6 +44,8 @@ import org.springframework.util.StringValueResolver;
  * @see BeanDefinition#getPropertyValues
  * @see BeanDefinition#getConstructorArgumentValues
  * @see PlaceholderConfigurerSupport
+ *
+ * 访问者模式
  */
 public class BeanDefinitionVisitor {
 

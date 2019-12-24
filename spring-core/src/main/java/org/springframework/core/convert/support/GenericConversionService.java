@@ -83,6 +83,7 @@ public class GenericConversionService implements ConfigurableConversionService {
 
 	@Override
 	public void addConverter(Converter<?, ?> converter) {
+		// 获取convert的泛型，length=2， [0]=source.class [1]=target.class
 		ResolvableType[] typeInfo = getRequiredTypeInfo(converter.getClass(), Converter.class);
 		if (typeInfo == null && converter instanceof DecoratingProxy) {
 			typeInfo = getRequiredTypeInfo(((DecoratingProxy) converter).getDecoratedClass(), Converter.class);

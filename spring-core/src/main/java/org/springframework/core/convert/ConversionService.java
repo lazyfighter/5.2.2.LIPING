@@ -25,6 +25,8 @@ import org.springframework.lang.Nullable;
  * @author Keith Donald
  * @author Phillip Webb
  * @since 3.0
+ *
+ * 类型转换服务，可以判断是否可以进行转换，应该依赖ConvertRegistry获取类型转换器
  */
 public interface ConversionService {
 

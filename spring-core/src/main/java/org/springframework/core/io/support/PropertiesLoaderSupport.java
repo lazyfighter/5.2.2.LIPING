@@ -43,19 +43,34 @@ public abstract class PropertiesLoaderSupport {
 	/** Logger available to subclasses. */
 	protected final Log logger = LogFactory.getLog(getClass());
 
+	/**
+	 * 本地配置
+	 */
 	@Nullable
 	protected Properties[] localProperties;
 
+	/**
+	 * 本地配置是否可以覆盖持久化的配置
+	 */
 	protected boolean localOverride = false;
 
+	/**
+	 * 持久化配置位置
+	 */
 	@Nullable
 	private Resource[] locations;
 
+	/**
+	 * 根据配置的持久化配置文件位置进行加载的时候，如果找不到是否以及忽略该文件
+	 */
 	private boolean ignoreResourceNotFound = false;
 
 	@Nullable
 	private String fileEncoding;
 
+	/**
+	 * 默认加载器，提供了xml加载以及key-value对加载
+	 */
 	private PropertiesPersister propertiesPersister = new DefaultPropertiesPersister();
 
 

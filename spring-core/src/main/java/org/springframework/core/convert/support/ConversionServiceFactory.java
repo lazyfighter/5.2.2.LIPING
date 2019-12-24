@@ -32,6 +32,9 @@ import org.springframework.lang.Nullable;
  * @author Juergen Hoeller
  * @author Chris Beams
  * @since 3.0
+ *
+ *
+ * 负责将用户提供的converter注册到conversionService里面
  */
 public final class ConversionServiceFactory {
 
