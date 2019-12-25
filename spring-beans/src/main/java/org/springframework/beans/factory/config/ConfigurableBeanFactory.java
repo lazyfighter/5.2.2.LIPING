@@ -50,6 +50,11 @@ import org.springframework.util.StringValueResolver;
  *
  *
  * ConfigurableBeanFactory 实现了层级接口，以及单例注册中心接口
+ * 1. beanClassLoader 管理
+ * 2. BeanFactory 管理
+ * 3. 是否缓存bean元数据flag
+ * 4. EL表达式解析器管理
+ * 5. type转换convertService管理
  *
  */
 public interface ConfigurableBeanFactory extends HierarchicalBeanFactory, SingletonBeanRegistry {

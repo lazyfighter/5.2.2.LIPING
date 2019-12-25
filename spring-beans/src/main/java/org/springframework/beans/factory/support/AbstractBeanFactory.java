@@ -110,6 +110,11 @@ import org.springframework.util.StringValueResolver;
  * @see #createBean
  * @see AbstractAutowireCapableBeanFactory#createBean
  * @see DefaultListableBeanFactory#getBeanDefinition
+ *
+ * 实现接口附带的能力：
+ * 1. 可配置各种服务能力包括解析EL，类型转换等
+ * 2. BeanFactory的层级关系
+ * 3. 单例注册中心
  */
 public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport implements ConfigurableBeanFactory {
 
