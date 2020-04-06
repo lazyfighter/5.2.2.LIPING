@@ -43,8 +43,8 @@ dependencies {
 	testRuntime("org.glassfish:javax.el")
 	testRuntime("org.javamoney:moneta")
 	testRuntime("org.junit.vintage:junit-vintage-engine") // for @Inject TCK
-	testFixturesApi("org.junit.jupiter:junit-jupiter-api")
-	testFixturesImplementation(testFixtures(project(":spring-beans")))
-	testFixturesImplementation("com.google.code.findbugs:jsr305")
-	testFixturesImplementation("org.assertj:assertj-core")
+//	testFixturesApi("org.junit.jupiter:junit-jupiter-api")
+//	testFixturesImplementation(testFixtures(project(":spring-beans")))
+//	testFixturesImplementation("com.google.code.findbugs:jsr305")
+//	testFixturesImplementation("org.assertj:assertj-core")
 }

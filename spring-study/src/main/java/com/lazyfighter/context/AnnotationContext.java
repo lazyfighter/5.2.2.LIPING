@@ -13,17 +13,22 @@ import org.springframework.core.convert.ConversionService;
 public class AnnotationContext {
 
 	public static void main(String[] args) {
-		AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext();
-		applicationContext.scan("com.lazyfighter");
-		applicationContext.refresh();
-		applicationContext.register(ConversionServiceFactoryBean.class);
-		ConversionServiceFactoryBean conversionServiceFactoryBean = new ConversionServiceFactoryBean();
-		ConversionService conversionService = applicationContext.getBean(ConversionService.class);
-		Person person = new Person();
-		person.setName("lll");
-		person.setGender("body");
-		Student student = conversionService.convert(person, Student.class);
-		System.out.println(student);
+		try {
+			AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext();
+			applicationContext.scan("com.lazyfighter");
+			applicationContext.refresh();
+			applicationContext.register(ConversionServiceFactoryBean.class);
+			ConversionServiceFactoryBean conversionServiceFactoryBean = new ConversionServiceFactoryBean();
+			ConversionService conversionService = applicationContext.getBean(ConversionService.class);
+			Person person = new Person();
+			person.setName("lll");
+			person.setGender("body");
+			Student student = conversionService.convert(person, Student.class);
+			System.out.println(student);
+		}catch (Exception e) {
+			System.out.println(e);
+		}
+
 
 	}
 
