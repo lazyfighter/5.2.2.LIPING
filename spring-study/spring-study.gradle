@@ -10,4 +10,6 @@ dependencies {
 	compile(project(":spring-jdbc"))
 	compile(project(":spring-core"))
 	optional("org.aspectj:aspectjweaver")
+	compileOnly 'org.projectlombok:lombok:1.18.12'
+	testCompileOnly 'org.projectlombok:lombok:1.18.12'
 }

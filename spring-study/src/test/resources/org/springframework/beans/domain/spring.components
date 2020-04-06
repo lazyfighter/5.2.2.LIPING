@@ -1,0 +1,2 @@
+Person=javax.persistence.Entity
+DriversLicense=javax.persistence.Entity

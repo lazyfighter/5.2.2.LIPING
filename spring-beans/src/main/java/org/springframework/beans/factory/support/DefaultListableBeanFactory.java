@@ -612,7 +612,7 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 
 		String[] beanNames = getBeanNamesForType(type, includeNonSingletons, allowEagerInit);
 		Map<String, T> result = new LinkedHashMap<>(beanNames.length);
-		for (String beanName : beanNames) {
+			for (String beanName : beanNames) {
 			try {
 				Object beanInstance = getBean(beanName);
 				if (!(beanInstance instanceof NullBean)) {

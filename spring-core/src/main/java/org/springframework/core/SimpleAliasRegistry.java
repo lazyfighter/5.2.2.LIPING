@@ -101,8 +101,7 @@ public class SimpleAliasRegistry implements AliasRegistry {
 	 */
 	public boolean hasAlias(String name, String alias) {
 		String registeredName = this.aliasMap.get(alias);
-		return ObjectUtils.nullSafeEquals(registeredName, name) || (registeredName != null
-				&& hasAlias(name, registeredName));
+		return ObjectUtils.nullSafeEquals(registeredName, name) || (registeredName != null && hasAlias(name, registeredName));
 	}
 
 	@Override
