@@ -32,6 +32,9 @@ import java.util.IdentityHashMap;
 import java.util.Map;
 import java.util.StringJoiner;
 
+import org.jetbrains.annotations.TestOnly;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.springframework.core.SerializableTypeWrapper.FieldTypeProvider;
 import org.springframework.core.SerializableTypeWrapper.MethodParameterTypeProvider;
 import org.springframework.core.SerializableTypeWrapper.TypeProvider;
@@ -1676,5 +1679,26 @@ public class ResolvableType implements Serializable {
 			return INSTANCE;
 		}
 	}
+
+
+	public static class TestUnit {
+
+		@Test
+		public void testEmptyType() {
+			EmptyType emptyType1 = new EmptyType();
+			EmptyType emptyType2 = new EmptyType();
+			Assertions.assertEquals(emptyType1.readResolve(), emptyType2.readResolve());
+		}
+
+
+		@Test
+		public void testParameterType() {
+
+
+
+
+		}
+	}
+
 
 }
