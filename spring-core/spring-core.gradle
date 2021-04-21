@@ -58,18 +58,15 @@ dependencies {
 	testCompile("org.xmlunit:xmlunit-assertj")
 	testCompile("org.xmlunit:xmlunit-matchers")
 	testCompile("javax.xml.bind:jaxb-api")
-	compile group: 'org.junit.platform', name: 'junit-platform-launcher', version:'1.2.0'
-	compile group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version:'5.2.0'
-	compile group: 'org.junit.vintage', name: 'junit-vintage-engine', version:'5.2.0'
 	testCompile("com.fasterxml.woodstox:woodstox-core")
 	testCompile(project(":kotlin-coroutines"))
-//	testFixturesImplementation("com.google.code.findbugs:jsr305")
-//	testFixturesImplementation("io.projectreactor:reactor-test")
-//	testFixturesImplementation("org.assertj:assertj-core")
-//	testFixturesImplementation("org.junit.platform:junit-platform-launcher")
-//	testFixturesImplementation("org.junit.jupiter:junit-jupiter-api")
-//	testFixturesImplementation("org.junit.jupiter:junit-jupiter-params")
-//	testFixturesImplementation("org.xmlunit:xmlunit-assertj")
+	testFixturesImplementation("com.google.code.findbugs:jsr305")
+	testFixturesImplementation("io.projectreactor:reactor-test")
+	testFixturesImplementation("org.assertj:assertj-core")
+	testFixturesImplementation("org.junit.platform:junit-platform-launcher")
+	testFixturesImplementation("org.junit.jupiter:junit-jupiter-api")
+	testFixturesImplementation("org.junit.jupiter:junit-jupiter-params")
+	testFixturesImplementation("org.xmlunit:xmlunit-assertj")
 }
 
 jar {
