@@ -1,4 +1,4 @@
-package com.lazyfighter.beanpostprocessor;
+package com.lazyfighter.processor;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;

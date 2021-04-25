@@ -58,14 +58,17 @@ public interface BeanDefinitionRegistry extends AliasRegistry {
 	 * @see GenericBeanDefinition
 	 * @see RootBeanDefinition
 	 * @see ChildBeanDefinition
+	 *
+	 * 注册一个beanDefinition
 	 */
-	void registerBeanDefinition(String beanName, BeanDefinition beanDefinition)
-			throws BeanDefinitionStoreException;
+	void registerBeanDefinition(String beanName, BeanDefinition beanDefinition) throws BeanDefinitionStoreException;
 
 	/**
 	 * Remove the BeanDefinition for the given name.
 	 * @param beanName the name of the bean instance to register
 	 * @throws NoSuchBeanDefinitionException if there is no such bean definition
+	 *
+	 * 删除一个beanDefinition
 	 */
 	void removeBeanDefinition(String beanName) throws NoSuchBeanDefinitionException;
 
@@ -74,6 +77,8 @@ public interface BeanDefinitionRegistry extends AliasRegistry {
 	 * @param beanName name of the bean to find a definition for
 	 * @return the BeanDefinition for the given name (never {@code null})
 	 * @throws NoSuchBeanDefinitionException if there is no such bean definition
+	 *
+	 * 根据名字获取指定的beanDefinition
 	 */
 	BeanDefinition getBeanDefinition(String beanName) throws NoSuchBeanDefinitionException;
 
@@ -81,6 +86,8 @@ public interface BeanDefinitionRegistry extends AliasRegistry {
 	 * Check if this registry contains a bean definition with the given name.
 	 * @param beanName the name of the bean to look for
 	 * @return if this registry contains a bean definition with the given name
+	 *
+	 * 判断是否存在指定名字的beanDefinition
 	 */
 	boolean containsBeanDefinition(String beanName);
 
@@ -88,12 +95,16 @@ public interface BeanDefinitionRegistry extends AliasRegistry {
 	 * Return the names of all beans defined in this registry.
 	 * @return the names of all beans defined in this registry,
 	 * or an empty array if none defined
+	 *
+	 * 获取所有的beanDefinition的名字
 	 */
 	String[] getBeanDefinitionNames();
 
 	/**
 	 * Return the number of beans defined in the registry.
 	 * @return the number of beans defined in the registry
+	 *
+	 * 包含beanDefinition数量
 	 */
 	int getBeanDefinitionCount();
 
@@ -102,6 +113,8 @@ public interface BeanDefinitionRegistry extends AliasRegistry {
 	 * i.e. whether there is a local bean or alias registered under this name.
 	 * @param beanName the name to check
 	 * @return whether the given bean name is already in use
+	 *
+	 * 判断指定的beanName是否在使用
 	 */
 	boolean isBeanNameInUse(String beanName);
 

@@ -70,30 +70,23 @@ import org.springframework.util.StringUtils;
  */
 public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements SingletonBeanRegistry {
 
-	/** Cache of singleton objects: bean name to bean instance. */
 	// 缓存创建完成的bean，同时它的依赖也已经完成注入
 	private final Map<String, Object> singletonObjects = new ConcurrentHashMap<>(256);
 
-	/** Cache of singleton factories: bean name to ObjectFactory. */
 	// 缓存bean的factory
 	private final Map<String, ObjectFactory<?>> singletonFactories = new HashMap<>(16);
 
-	/** Cache of early singleton objects: bean name to bean instance. */
-	// 缓存的是创建完成了bean但是还没有注入依赖bean
+	// 缓存的是创建完成了bean, 但是还没有注入依赖bean
 	private final Map<String, Object> earlySingletonObjects = new HashMap<>(16);
 
-	/** Set of registered singletons, containing the bean names in registration order. */
 	// 所有注册的单例bean的名称
 	private final Set<String> registeredSingletons = new LinkedHashSet<>(256);
 
-	/** Names of beans that are currently in creation. */
-	// 缓存创建中的bean
-	private final Set<String> singletonsCurrentlyInCreation =
-			Collections.newSetFromMap(new ConcurrentHashMap<>(16));
+	// 缓存创建中的bean名称
+	private final Set<String> singletonsCurrentlyInCreation = Collections.newSetFromMap(new ConcurrentHashMap<>(16));
 
-	/** Names of beans currently excluded from in creation checks. */
-	private final Set<String> inCreationCheckExclusions =
-			Collections.newSetFromMap(new ConcurrentHashMap<>(16));
+	// 缓存创建中的bean名称
+	private final Set<String> inCreationCheckExclusions = Collections.newSetFromMap(new ConcurrentHashMap<>(16));
 
 	/** List of suppressed Exceptions, available for associating related causes. */
 	@Nullable
@@ -147,12 +140,12 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 	 * 将注册的bean保存到缓存中
 	 * 1. 保存到创建完成的bean中，singletonObjects
 	 * 2. 移除bean的构造工厂类，singletonFactories
-	 * 3. 从为完成注入bean缓存中移除，earlySingletonObjects
+	 * 3. 从未完成注入bean缓存中移除，earlySingletonObjects
 	 * 4. 保存注册bean的名称
 	 */
 	protected void addSingleton(String beanName, Object singletonObject) {
 		synchronized (this.singletonObjects) {
-			// 缓存单例对象，放入一级花奴才能中
+			// 缓存单例对象，放入一级缓存中
 			this.singletonObjects.put(beanName, singletonObject);
 			// 缓存单例对象名称
 			this.registeredSingletons.add(beanName);
@@ -253,7 +246,7 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 			// 从一级缓存中获取
 			Object singletonObject = this.singletonObjects.get(beanName);
 			if (singletonObject == null) {
-				// 如果一级缓存为空，同时该bean在销魂中，抛出异常
+				// 如果一级缓存为空，同时该bean在销毁中，抛出异常
 				if (this.singletonsCurrentlyInDestruction) {
 					throw new BeanCreationNotAllowedException(beanName,
 							"Singleton bean creation not allowed while singletons of this factory are in destruction " +

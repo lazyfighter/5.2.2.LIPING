@@ -9,10 +9,10 @@ import org.springframework.stereotype.Service;
 public class CircularServiceImpl implements CircularService {
 
 	@Autowired
-	private HelloService helloService;
+	private HelloService helloServiceImpl;
 
 	@Override
 	public void circular() {
-		System.out.println(helloService.hashCode());
+		System.out.println(helloServiceImpl.hashCode());
 	}
 }

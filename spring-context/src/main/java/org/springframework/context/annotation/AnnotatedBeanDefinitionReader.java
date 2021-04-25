@@ -111,8 +111,7 @@ public class AnnotatedBeanDefinitionReader {
 	 * <p>The default is a {@link AnnotationBeanNameGenerator}.
 	 */
 	public void setBeanNameGenerator(@Nullable BeanNameGenerator beanNameGenerator) {
-		this.beanNameGenerator =
-				(beanNameGenerator != null ? beanNameGenerator : AnnotationBeanNameGenerator.INSTANCE);
+		this.beanNameGenerator = beanNameGenerator != null ? beanNameGenerator : AnnotationBeanNameGenerator.INSTANCE;
 	}
 
 	/**
@@ -120,8 +119,7 @@ public class AnnotatedBeanDefinitionReader {
 	 * <p>The default is an {@link AnnotationScopeMetadataResolver}.
 	 */
 	public void setScopeMetadataResolver(@Nullable ScopeMetadataResolver scopeMetadataResolver) {
-		this.scopeMetadataResolver =
-				(scopeMetadataResolver != null ? scopeMetadataResolver : new AnnotationScopeMetadataResolver());
+		this.scopeMetadataResolver = scopeMetadataResolver != null ? scopeMetadataResolver : new AnnotationScopeMetadataResolver();
 	}
 
 
@@ -181,9 +179,7 @@ public class AnnotatedBeanDefinitionReader {
 	 * in addition to qualifiers at the bean class level
 	 */
 	@SuppressWarnings("unchecked")
-	public void registerBean(Class<?> beanClass, @Nullable String name,
-			Class<? extends Annotation>... qualifiers) {
-
+	public void registerBean(Class<?> beanClass, @Nullable String name, Class<? extends Annotation>... qualifiers) {
 		doRegisterBean(beanClass, name, qualifiers, null, null);
 	}
 
@@ -227,9 +223,7 @@ public class AnnotatedBeanDefinitionReader {
 	 * {@link BeanDefinition}, e.g. setting a lazy-init or primary flag
 	 * @since 5.2
 	 */
-	public <T> void registerBean(Class<T> beanClass, @Nullable String name, @Nullable Supplier<T> supplier,
-			BeanDefinitionCustomizer... customizers) {
-
+	public <T> void registerBean(Class<T> beanClass, @Nullable String name, @Nullable Supplier<T> supplier, BeanDefinitionCustomizer... customizers) {
 		doRegisterBean(beanClass, name, null, supplier, customizers);
 	}
 
@@ -246,10 +240,7 @@ public class AnnotatedBeanDefinitionReader {
 	 * {@link BeanDefinition}, e.g. setting a lazy-init or primary flag
 	 * @since 5.0
 	 */
-	private <T> void doRegisterBean(Class<T> beanClass, @Nullable String name,
-			@Nullable Class<? extends Annotation>[] qualifiers, @Nullable Supplier<T> supplier,
-			@Nullable BeanDefinitionCustomizer[] customizers) {
-
+	private <T> void doRegisterBean(Class<T> beanClass, @Nullable String name, @Nullable Class<? extends Annotation>[] qualifiers, @Nullable Supplier<T> supplier, @Nullable BeanDefinitionCustomizer[] customizers) {
 		AnnotatedGenericBeanDefinition abd = new AnnotatedGenericBeanDefinition(beanClass);
 		if (this.conditionEvaluator.shouldSkip(abd.getMetadata())) {
 			return;
