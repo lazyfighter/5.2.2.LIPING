@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.support.SimpleBeanDefinitionRegistry;
 import org.springframework.context.annotation.ClassPathBeanDefinitionScanner;
 
-public class ClassPathBeanDefinitionScannerTest {
+public class ClassPathBeanDefinitionScannerTestOrderAutoWireCase {
 
 	@Test
 	public void testScanner() {

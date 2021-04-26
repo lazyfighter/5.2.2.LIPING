@@ -41,8 +41,7 @@ import org.springframework.lang.Nullable;
  *
  * 这里需要注意的是spring把IOC容器抽象了两个大的接口，一个是获取get接口beanFactory的实现类，一个是注册put接口BeanDefinitionRegistry
  */
-public interface ConfigurableListableBeanFactory
-		extends ListableBeanFactory, AutowireCapableBeanFactory, ConfigurableBeanFactory {
+public interface ConfigurableListableBeanFactory extends ListableBeanFactory, AutowireCapableBeanFactory, ConfigurableBeanFactory {
 
 	/**
 	 * Ignore the given dependency type for autowiring:

@@ -156,6 +156,9 @@ public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccess
 	@Nullable
 	private String[] dependsOn;
 
+	/**
+	 * 这个bean是是否可以自动装备到别的bean中
+	 */
 	private boolean autowireCandidate = true;
 
 	private boolean primary = false;

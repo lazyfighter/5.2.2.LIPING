@@ -72,11 +72,7 @@ public abstract class BeanFactoryUtils {
 	}
 
 	/**
-	 * Return the actual bean name, stripping out the factory dereference
-	 * prefix (if any, also stripping repeated factory prefixes if found).
-	 * @param name the name of the bean
-	 * @return the transformed name
-	 * @see BeanFactory#FACTORY_BEAN_PREFIX
+	 * 返回真实的beanName， 删除前缀工厂&符标志
 	 */
 	public static String transformedBeanName(String name) {
 		Assert.notNull(name, "'name' must not be null");
