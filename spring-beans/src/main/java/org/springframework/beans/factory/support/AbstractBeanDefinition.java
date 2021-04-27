@@ -153,6 +153,9 @@ public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccess
 
 	private int dependencyCheck = DEPENDENCY_CHECK_NONE;
 
+	/**
+	 * 该bean实例化依赖所有的beanName
+	 */
 	@Nullable
 	private String[] dependsOn;
 
