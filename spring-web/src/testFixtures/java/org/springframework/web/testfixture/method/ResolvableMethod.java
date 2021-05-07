@@ -614,8 +614,7 @@ public class ResolvableMethod {
 	}
 
 
-	private static class MethodInvocationInterceptor
-			implements org.springframework.cglib.proxy.MethodInterceptor, MethodInterceptor {
+	private static class MethodInvocationInterceptor implements org.springframework.cglib.proxy.MethodInterceptor, MethodInterceptor {
 
 		private Method invokedMethod;
 

@@ -174,6 +174,9 @@ public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccess
 	@Nullable
 	private String factoryBeanName;
 
+	/**
+	 * 实例化bean的工厂方法名称
+	 */
 	@Nullable
 	private String factoryMethodName;
 

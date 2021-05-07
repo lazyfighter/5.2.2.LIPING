@@ -382,10 +382,6 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 	}
 
 	/**
-	 * Return whether the specified singleton bean is currently in creation
-	 * (within the entire factory).
-	 * @param beanName the name of the bean
-	 *
 	 * 判断这个bean是否在创建中,主要用于判断是否循环创建，如果A依赖B， B依赖A， 则在
 	 * 创建A的时候加入Set中，然后在创建B，这时候B依赖A，在这个Set中可以查到
 	 */

@@ -1,4 +1,4 @@
-package com.lazyfighter.bean.inject.autowire.lookup;
+package com.lazyfighter.bean.inject.lookup;
 
 public interface LookUpService {
 

@@ -72,7 +72,9 @@ public class RootBeanDefinition extends AbstractBeanDefinition {
 	@Nullable
 	volatile ResolvableType targetType;
 
-	/** Package-visible field for caching the determined Class of a given bean definition. */
+	/**
+	 * 当前bean的实例类型
+	 */
 	@Nullable
 	volatile Class<?> resolvedTargetType;
 
@@ -88,7 +90,9 @@ public class RootBeanDefinition extends AbstractBeanDefinition {
 	@Nullable
 	volatile Method factoryMethodToIntrospect;
 
-	/** Common lock for the four constructor fields below. */
+	/**
+	 * 公共锁用于bean实例化
+	 */
 	final Object constructorArgumentLock = new Object();
 
 	/** Package-visible field for caching the resolved constructor or factory method. */
@@ -106,7 +110,9 @@ public class RootBeanDefinition extends AbstractBeanDefinition {
 	@Nullable
 	Object[] preparedConstructorArguments;
 
-	/** Common lock for the two post-processing fields below. */
+	/**
+	 * 后置处理器通用锁
+	 */
 	final Object postProcessingLock = new Object();
 
 	/**
@@ -120,12 +126,21 @@ public class RootBeanDefinition extends AbstractBeanDefinition {
 	@Nullable
 	volatile Boolean beforeInstantiationResolved;
 
+	/**
+	 * 需要注入的元素 @autowire @value @Resource @Ejb @webServiceRef
+	 */
 	@Nullable
 	private Set<Member> externallyManagedConfigMembers;
 
+	/**
+	 * 解析出来的初始化方法 @PostConstruct
+	 */
 	@Nullable
 	private Set<String> externallyManagedInitMethods;
 
+	/**
+	 * 解析出来的初始化方法 @PreDestroy
+	 */
 	@Nullable
 	private Set<String> externallyManagedDestroyMethods;
 

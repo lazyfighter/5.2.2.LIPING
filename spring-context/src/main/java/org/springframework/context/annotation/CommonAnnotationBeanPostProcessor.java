@@ -142,8 +142,7 @@ import org.springframework.util.StringValueResolver;
  * @see org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor
  */
 @SuppressWarnings("serial")
-public class CommonAnnotationBeanPostProcessor extends InitDestroyAnnotationBeanPostProcessor
-		implements InstantiationAwareBeanPostProcessor, BeanFactoryAware, Serializable {
+public class CommonAnnotationBeanPostProcessor extends InitDestroyAnnotationBeanPostProcessor implements InstantiationAwareBeanPostProcessor, BeanFactoryAware, Serializable {
 
 	@Nullable
 	private static Class<? extends Annotation> webServiceRefClass;

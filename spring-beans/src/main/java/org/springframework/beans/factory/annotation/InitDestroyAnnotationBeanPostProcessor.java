@@ -77,8 +77,7 @@ import org.springframework.util.ReflectionUtils;
  * @see #setDestroyAnnotationType
  */
 @SuppressWarnings("serial")
-public class InitDestroyAnnotationBeanPostProcessor
-		implements DestructionAwareBeanPostProcessor, MergedBeanDefinitionPostProcessor, PriorityOrdered, Serializable {
+public class InitDestroyAnnotationBeanPostProcessor implements DestructionAwareBeanPostProcessor, MergedBeanDefinitionPostProcessor, PriorityOrdered, Serializable {
 
 	private final transient LifecycleMetadata emptyLifecycleMetadata =
 			new LifecycleMetadata(Object.class, Collections.emptyList(), Collections.emptyList()) {
@@ -100,9 +99,15 @@ public class InitDestroyAnnotationBeanPostProcessor
 
 	protected transient Log logger = LogFactory.getLog(getClass());
 
+	/**
+	 * 初始化注解 解析类方法有标识@PostCunstruct
+	 */
 	@Nullable
 	private Class<? extends Annotation> initAnnotationType;
 
+	/**
+	 * 销毁方法注解 解释方法有标识@PreDestroy
+	 */
 	@Nullable
 	private Class<? extends Annotation> destroyAnnotationType;
 
