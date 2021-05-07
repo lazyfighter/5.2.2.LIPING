@@ -255,8 +255,7 @@ public class AutowiredAnnotationBeanPostProcessor extends InstantiationAwareBean
 
 	@Override
 	@Nullable
-	public Constructor<?>[] determineCandidateConstructors(Class<?> beanClass, final String beanName)
-			throws BeanCreationException {
+	public Constructor<?>[] determineCandidateConstructors(Class<?> beanClass, final String beanName) throws BeanCreationException {
 
 		// Let's check for lookup methods here...
 		if (!this.lookupMethodsChecked.contains(beanName)) {

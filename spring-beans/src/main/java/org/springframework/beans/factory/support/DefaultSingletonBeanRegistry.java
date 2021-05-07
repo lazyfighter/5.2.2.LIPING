@@ -82,7 +82,9 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 	// 所有注册的单例bean的名称
 	private final Set<String> registeredSingletons = new LinkedHashSet<>(256);
 
-	// 缓存创建中的bean名称
+	/**
+	 * 缓存正在创建中的bean名称
+	 */
 	private final Set<String> singletonsCurrentlyInCreation = Collections.newSetFromMap(new ConcurrentHashMap<>(16));
 
 	// 缓存创建中的bean名称
@@ -92,7 +94,9 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 	@Nullable
 	private Set<Exception> suppressedExceptions;
 
-	/** Flag that indicates whether we're currently within destroySingletons. */
+	/**
+	 * 标识目前正在销毁bean
+	 */
 	private boolean singletonsCurrentlyInDestruction = false;
 
 	/** Disposable bean instances: bean name to disposable instance. */
@@ -270,24 +274,21 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 				try {
 					singletonObject = singletonFactory.getObject();
 					newSingleton = true;
-				}
-				catch (IllegalStateException ex) {
+				} catch (IllegalStateException ex) {
 					// Has the singleton object implicitly appeared in the meantime ->
 					// if yes, proceed with it since the exception indicates that state.
 					singletonObject = this.singletonObjects.get(beanName);
 					if (singletonObject == null) {
 						throw ex;
 					}
-				}
-				catch (BeanCreationException ex) {
+				} catch (BeanCreationException ex) {
 					if (recordSuppressedExceptions) {
 						for (Exception suppressedException : this.suppressedExceptions) {
 							ex.addRelatedCause(suppressedException);
 						}
 					}
 					throw ex;
-				}
-				finally {
+				} finally {
 					if (recordSuppressedExceptions) {
 						this.suppressedExceptions = null;
 					}
@@ -393,11 +394,7 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 	}
 
 	/**
-	 * Callback before singleton creation.
-	 * <p>The default implementation register the singleton as currently in creation.
-	 * @param beanName the name of the singleton about to be created
-	 * @see #isSingletonCurrentlyInCreation
-	 *  bean不包含在非创建状态 && 缓存创建状态成功（缓存创建状态不包含该bean，set#add == true）
+	 *  bean不包含在非创建状态检查排除 && 缓存创建状态成功（缓存创建状态不包含该bean，set#add == true）
 	 */
 	protected void beforeSingletonCreation(String beanName) {
 		if (!this.inCreationCheckExclusions.contains(beanName) && !this.singletonsCurrentlyInCreation.add(beanName)) {

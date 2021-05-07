@@ -318,8 +318,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 						try {
 							// 获取依赖的beanName对应的bean
 							getBean(dep);
-						}
-						catch (NoSuchBeanDefinitionException ex) {
+						} catch (NoSuchBeanDefinitionException ex) {
 							throw new BeanCreationException(mbd.getResourceDescription(), beanName,
 									"'" + beanName + "' depends on missing bean '" + dep + "'", ex);
 						}
@@ -331,8 +330,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 					sharedInstance = getSingleton(beanName, () -> {
 						try {
 							return createBean(beanName, mbd, args);
-						}
-						catch (BeansException ex) {
+						} catch (BeansException ex) {
 							// Explicitly remove instance from singleton cache: It might have been put there
 							// eagerly by the creation process, to allow for circular reference resolution.
 							// Also remove any beans that received a temporary reference to the bean.
@@ -1448,15 +1446,12 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 			} else {
 				return doResolveBeanClass(mbd, typesToMatch);
 			}
-		}
-		catch (PrivilegedActionException pae) {
+		} catch (PrivilegedActionException pae) {
 			ClassNotFoundException ex = (ClassNotFoundException) pae.getException();
 			throw new CannotLoadBeanClassException(mbd.getResourceDescription(), beanName, mbd.getBeanClassName(), ex);
-		}
-		catch (ClassNotFoundException ex) {
+		} catch (ClassNotFoundException ex) {
 			throw new CannotLoadBeanClassException(mbd.getResourceDescription(), beanName, mbd.getBeanClassName(), ex);
-		}
-		catch (LinkageError err) {
+		} catch (LinkageError err) {
 			throw new CannotLoadBeanClassException(mbd.getResourceDescription(), beanName, mbd.getBeanClassName(), err);
 		}
 	}
@@ -1842,10 +1837,8 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 				// Register a DisposableBean implementation that performs all destruction
 				// work for the given bean: DestructionAwareBeanPostProcessors,
 				// DisposableBean interface, custom destroy method.
-				registerDisposableBean(beanName,
-						new DisposableBeanAdapter(bean, beanName, mbd, getBeanPostProcessors(), acc));
-			}
-			else {
+				registerDisposableBean(beanName, new DisposableBeanAdapter(bean, beanName, mbd, getBeanPostProcessors(), acc));
+			} else {
 				// A bean with a custom scope...
 				Scope scope = this.scopes.get(mbd.getScope());
 				if (scope == null) {
@@ -1901,17 +1894,8 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 	protected abstract BeanDefinition getBeanDefinition(String beanName) throws BeansException;
 
 	/**
-	 * Create a bean instance for the given merged bean definition (and arguments).
-	 * The bean definition will already have been merged with the parent definition
-	 * in case of a child definition.
-	 * <p>All bean retrieval methods delegate to this method for actual bean creation.
-	 * @param beanName the name of the bean
-	 * @param mbd the merged bean definition for the bean
-	 * @param args explicit arguments to use for constructor or factory method invocation
-	 * @return a new instance of the bean
-	 * @throws BeanCreationException if the bean could not be created
+	 * 根据指定的beanName 以及beanDefinition 以及 构造参数进行构造bean
 	 */
-	protected abstract Object createBean(String beanName, RootBeanDefinition mbd, @Nullable Object[] args)
-			throws BeanCreationException;
+	protected abstract Object createBean(String beanName, RootBeanDefinition mbd, @Nullable Object[] args) throws BeanCreationException;
 
 }

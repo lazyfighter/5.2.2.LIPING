@@ -66,26 +66,22 @@ public abstract class AbstractBeanDefinition extends BeanMetadataAttributeAccess
 	public static final String SCOPE_DEFAULT = "";
 
 	/**
-	 * Constant that indicates no external autowiring at all.
-	 * @see #setAutowireMode
+	 * 标识不需要注入
 	 */
 	public static final int AUTOWIRE_NO = AutowireCapableBeanFactory.AUTOWIRE_NO;
 
 	/**
-	 * Constant that indicates autowiring bean properties by name.
-	 * @see #setAutowireMode
+	 * 通过名称注入
 	 */
 	public static final int AUTOWIRE_BY_NAME = AutowireCapableBeanFactory.AUTOWIRE_BY_NAME;
 
 	/**
-	 * Constant that indicates autowiring bean properties by type.
-	 * @see #setAutowireMode
+	 * 通过类型注入
 	 */
 	public static final int AUTOWIRE_BY_TYPE = AutowireCapableBeanFactory.AUTOWIRE_BY_TYPE;
 
 	/**
-	 * Constant that indicates autowiring a constructor.
-	 * @see #setAutowireMode
+	 * 通过构造器注入
 	 */
 	public static final int AUTOWIRE_CONSTRUCTOR = AutowireCapableBeanFactory.AUTOWIRE_CONSTRUCTOR;
 
