@@ -85,8 +85,7 @@ import org.springframework.util.ClassUtils;
  *
  * BeanFactoryPostProcessor, 用来处理@Configuration类
  */
-public class ConfigurationClassPostProcessor implements BeanDefinitionRegistryPostProcessor,
-		PriorityOrdered, ResourceLoaderAware, BeanClassLoaderAware, EnvironmentAware {
+public class ConfigurationClassPostProcessor implements BeanDefinitionRegistryPostProcessor, PriorityOrdered, ResourceLoaderAware, BeanClassLoaderAware, EnvironmentAware {
 
 	/**
 	 * A {@code BeanNameGenerator} using fully qualified class names as default bean names.
@@ -97,11 +96,9 @@ public class ConfigurationClassPostProcessor implements BeanDefinitionRegistryPo
 	 * @since 5.2
 	 * @see #setBeanNameGenerator
 	 */
-	public static final AnnotationBeanNameGenerator IMPORT_BEAN_NAME_GENERATOR =
-			new FullyQualifiedAnnotationBeanNameGenerator();
+	public static final AnnotationBeanNameGenerator IMPORT_BEAN_NAME_GENERATOR = new FullyQualifiedAnnotationBeanNameGenerator();
 
-	private static final String IMPORT_REGISTRY_BEAN_NAME =
-			ConfigurationClassPostProcessor.class.getName() + ".importRegistry";
+	private static final String IMPORT_REGISTRY_BEAN_NAME = ConfigurationClassPostProcessor.class.getName() + ".importRegistry";
 
 
 	private final Log logger = LogFactory.getLog(getClass());
