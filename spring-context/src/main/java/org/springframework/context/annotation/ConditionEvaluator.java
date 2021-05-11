@@ -39,12 +39,6 @@ import org.springframework.util.ClassUtils;
 import org.springframework.util.MultiValueMap;
 
 /**
- * Internal class used to evaluate {@link Conditional} annotations.
- *
- * @author Phillip Webb
- * @author Juergen Hoeller
- * @since 4.0
- *
  * 用来解析注解Conditional的
  */
 class ConditionEvaluator {
@@ -73,18 +67,22 @@ class ConditionEvaluator {
 	}
 
 	/**
-	 * Determine if an item should be skipped based on {@code @Conditional} annotations.
-	 * @param metadata the meta data
-	 * @param phase the phase of the call
-	 * @return if the item should be skipped
-	 *
 	 * 判断Configuration类上面的是否标注Conditional，如果标注则进行条件判断
 	 */
 	public boolean shouldSkip(@Nullable AnnotatedTypeMetadata metadata, @Nullable ConfigurationPhase phase) {
+		/**
+		 * 1. 如果没有标注conditional不进行跳过
+		 */
 		if (metadata == null || !metadata.isAnnotated(Conditional.class.getName())) {
 			return false;
 		}
 
+		/**
+		 * 2. 如果没有指定阶段进行执行， 则进行判断
+		 * 如果标准类有 @Component @ComponentScan @Import @ImportResource 或者方法上面有@Bean进行标注则在解析@Configuration注册之前进行执行
+		 *
+		 * 如果没有则在解析完@Configuration注解类注册完bean进行执行
+		 */
 		if (phase == null) {
 			if (metadata instanceof AnnotationMetadata && ConfigurationClassUtils.isConfigurationCandidate((AnnotationMetadata) metadata)) {
 				return shouldSkip(metadata, ConfigurationPhase.PARSE_CONFIGURATION);
@@ -92,6 +90,10 @@ class ConditionEvaluator {
 			return shouldSkip(metadata, ConfigurationPhase.REGISTER_BEAN);
 		}
 
+
+		/**
+		 * 3. 获取@Configuration上面标注的 @Conditional注解，以及配置的执行类， 进行实例化
+		 */
 		List<Condition> conditions = new ArrayList<>();
 		for (String[] conditionClasses : getConditionClasses(metadata)) {
 			for (String conditionClass : conditionClasses) {
@@ -100,8 +102,16 @@ class ConditionEvaluator {
 			}
 		}
 
+		/**
+		 * 4. 按照@Order进行排序
+		 */
 		AnnotationAwareOrderComparator.sort(conditions);
 
+
+		/**
+		 * 5. 如果给定的condition实现了ConfigurationCondition接口指定了阶段，则判断阶段是否相符，如果相符执行返回结果， 如果不相符直接跳过condition的执行
+		 * 如果没有指定执行阶段， 则直接进行执行
+		 */
 		for (Condition condition : conditions) {
 			ConfigurationPhase requiredPhase = null;
 			if (condition instanceof ConfigurationCondition) {
