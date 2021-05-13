@@ -4,14 +4,14 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-@Component("test1")
-public class HelloServiceImpl implements InitializingBean {
+@Component("test2")
+public class HelloServiceImpl2 implements InitializingBean {
 
 	@Autowired
-	private HelloServiceImpl2 helloServiceImpl2;
+	private HelloServiceImpl helloService;
 
 	public void sayHi() {
-		System.out.println(helloServiceImpl2);
+		System.out.println(helloService);
 		System.out.println("hi");
 	}
 
