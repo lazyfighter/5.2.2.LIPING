@@ -42,18 +42,12 @@ public class DefaultPointcutAdvisor extends AbstractGenericPointcutAdvisor imple
 
 
 	/**
-	 * Create an empty DefaultPointcutAdvisor.
-	 * <p>Advice must be set before use using setter methods.
-	 * Pointcut will normally be set also, but defaults to {@code Pointcut.TRUE}.
+	 * 默认的aop切面以及拦截，拦截所有class  method
 	 */
 	public DefaultPointcutAdvisor() {
 	}
 
 	/**
-	 * Create a DefaultPointcutAdvisor that matches all methods.
-	 * <p>{@code Pointcut.TRUE} will be used as Pointcut.
-	 * @param advice the Advice to use
-	 *
 	 *  若没有指定advice,默认Pointcut.TRUE，也就是说会匹配所有的方法的执行
 	 */
 	public DefaultPointcutAdvisor(Advice advice) {
@@ -61,9 +55,7 @@ public class DefaultPointcutAdvisor extends AbstractGenericPointcutAdvisor imple
 	}
 
 	/**
-	 * Create a DefaultPointcutAdvisor, specifying Pointcut and Advice.
-	 * @param pointcut the Pointcut targeting the Advice
-	 * @param advice the Advice to run when Pointcut matches
+	 * 指定切面和拦截
 	 */
 	public DefaultPointcutAdvisor(Pointcut pointcut, Advice advice) {
 		this.pointcut = pointcut;

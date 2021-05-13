@@ -19,16 +19,7 @@ package org.springframework.aop.support;
 import org.aopalliance.aop.Advice;
 
 /**
- * Abstract generic {@link org.springframework.aop.PointcutAdvisor}
- * that allows for any {@link Advice} to be configured.
- *
- * @author Juergen Hoeller
- * @since 2.0
- * @see #setAdvice
- * @see DefaultPointcutAdvisor
- *
- * 由于此类集成了AbstractPointcutAdvisor ，同时自身又advice的保存，
- * 因此它的子类可以直接获得pointCut和advice
+ * 可以配置拦截器
  */
 @SuppressWarnings("serial")
 public abstract class AbstractGenericPointcutAdvisor extends AbstractPointcutAdvisor {

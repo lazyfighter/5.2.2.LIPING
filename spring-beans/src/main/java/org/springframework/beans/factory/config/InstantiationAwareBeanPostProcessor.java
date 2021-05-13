@@ -23,26 +23,7 @@ import org.springframework.beans.PropertyValues;
 import org.springframework.lang.Nullable;
 
 /**
- * Subinterface of {@link BeanPostProcessor} that adds a before-instantiation callback,
- * and a callback after instantiation but before explicit properties are set or
- * autowiring occurs.
- *
- * <p>Typically used to suppress default instantiation for specific target beans,
- * for example to create proxies with special TargetSources (pooling targets,
- * lazily initializing targets, etc), or to implement additional injection strategies
- * such as field injection.
- *
- * <p><b>NOTE:</b> This interface is a special purpose interface, mainly for
- * internal use within the framework. It is recommended to implement the plain
- * {@link BeanPostProcessor} interface as far as possible, or to derive from
- * {@link InstantiationAwareBeanPostProcessorAdapter} in order to be shielded
- * from extensions to this interface.
- *
- * @author Juergen Hoeller
- * @author Rod Johnson
- * @since 1.2
- * @see org.springframework.aop.framework.autoproxy.AbstractAutoProxyCreator#setCustomTargetSourceCreators
- * @see org.springframework.aop.framework.autoproxy.target.LazyInitTargetSourceCreator
+ * BeanPostProcessor的增强接口， 可以修改bean类型， 通常用于实现aop ， 同时提供注入属性的自定义装配抽象
  */
 public interface InstantiationAwareBeanPostProcessor extends BeanPostProcessor {
 
@@ -63,22 +44,7 @@ public interface InstantiationAwareBeanPostProcessor extends BeanPostProcessor {
 	}
 
 	/**
-	 * Post-process the given property values before the factory applies them
-	 * to the given bean, without any need for property descriptors.
-	 * <p>Implementations should return {@code null} (the default) if they provide a custom
-	 * {@link #postProcessPropertyValues} implementation, and {@code pvs} otherwise.
-	 * In a future version of this interface (with {@link #postProcessPropertyValues} removed),
-	 * the default implementation will return the given {@code pvs} as-is directly.
-	 * @param pvs the property values that the factory is about to apply (never {@code null})
-	 * @param bean the bean instance created, but whose properties have not yet been set
-	 * @param beanName the name of the bean
-	 * @return the actual property values to apply to the given bean (can be the passed-in
-	 * PropertyValues instance), or {@code null} which proceeds with the existing properties
-	 * but specifically continues with a call to {@link #postProcessPropertyValues}
-	 * (requiring initialized {@code PropertyDescriptor}s for the current bean class)
-	 * @throws org.springframework.beans.BeansException in case of errors
-	 * @since 5.1
-	 * @see #postProcessPropertyValues
+	 * 提供属性注入， 返回注入的value，如果返回为null ，则不再进行注入
 	 */
 	@Nullable
 	default PropertyValues postProcessProperties(PropertyValues pvs, Object bean, String beanName)
@@ -109,8 +75,7 @@ public interface InstantiationAwareBeanPostProcessor extends BeanPostProcessor {
 	 */
 	@Deprecated
 	@Nullable
-	default PropertyValues postProcessPropertyValues(
-			PropertyValues pvs, PropertyDescriptor[] pds, Object bean, String beanName) throws BeansException {
+	default PropertyValues postProcessPropertyValues(PropertyValues pvs, PropertyDescriptor[] pds, Object bean, String beanName) throws BeansException {
 
 		return pvs;
 	}

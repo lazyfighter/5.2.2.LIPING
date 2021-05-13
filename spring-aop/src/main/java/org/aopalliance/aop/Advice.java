@@ -26,7 +26,9 @@ package org.aopalliance.aop;
  * 有了pointcut，有了切面，就应该执行我们需要的操作了，spring定义了通知，
  * 可以实现在程序执行到切面的时候，进行callback Advice来实现具体的操作
  * 同时通知分为以下几种，
- * Interception Around：JointPoint前后调用
+ *
+ *
+ * Interceptors Around：JointPoint前后调用
  * Before：JointPoint前调用
  * After Returning：JointPoint后调用
  * Throw：JoinPoint抛出异常时调用

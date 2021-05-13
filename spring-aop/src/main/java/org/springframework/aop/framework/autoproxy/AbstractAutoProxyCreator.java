@@ -93,8 +93,7 @@ import org.springframework.util.StringUtils;
  * 负责代理的具体创建this#getEarlyBeanReference
  */
 @SuppressWarnings("serial")
-public abstract class AbstractAutoProxyCreator extends ProxyProcessorSupport
-		implements SmartInstantiationAwareBeanPostProcessor, BeanFactoryAware {
+public abstract class AbstractAutoProxyCreator extends ProxyProcessorSupport implements SmartInstantiationAwareBeanPostProcessor, BeanFactoryAware {
 
 	/**
 	 * Convenience constant for subclasses: Return value for "do not proxy".
@@ -290,9 +289,7 @@ public abstract class AbstractAutoProxyCreator extends ProxyProcessorSupport
 	}
 
 	/**
-	 * Create a proxy with the configured interceptors if the bean is
-	 * identified as one to proxy by the subclass.
-	 * @see #getAdvicesAndAdvisorsForBean
+	 * 判断给定的bean是否需要进行拦截， 如果需要拦截则创建代理对象， 然后返回代理对象
 	 */
 	@Override
 	public Object postProcessAfterInitialization(@Nullable Object bean, String beanName) {

@@ -8,13 +8,13 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.stereotype.Component;
 
-//@EnableAspectJAutoProxy
-//@Component
-//@Aspect
+@EnableAspectJAutoProxy
+@Component
+@Aspect
 public class AopAspect {
 
 
-	@Pointcut("execution(* com.lazyfighter.service.impl..*(..))")
+	@Pointcut("execution(* com.lazyfighter.aop.impl..*(..))")
 	public void pointCut(){}
 
 	@Before("pointCut()")

@@ -16,8 +16,6 @@
 
 package org.springframework.aop.framework;
 
-import java.io.Closeable;
-
 import org.springframework.beans.factory.Aware;
 import org.springframework.beans.factory.BeanClassLoaderAware;
 import org.springframework.beans.factory.DisposableBean;
@@ -27,16 +25,18 @@ import org.springframework.lang.Nullable;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.ObjectUtils;
 
+import java.io.Closeable;
+
 /**
  * Base class with common functionality for proxy processors, in particular
  * ClassLoader management and the {@link #evaluateProxyInterfaces} algorithm.
  *
  * @author Juergen Hoeller
- * @since 4.1
  * @see AbstractAdvisingBeanPostProcessor
  * @see org.springframework.aop.framework.autoproxy.AbstractAutoProxyCreator
- *
+ * <p>
  * AOP基础类，管理classLoader，以及判断bean通过哪种类型的反射，cglib还是jdkDynamic
+ * @since 4.1
  */
 @SuppressWarnings("serial")
 public class ProxyProcessorSupport extends ProxyConfig implements Ordered, BeanClassLoaderAware, AopInfrastructureBean {
@@ -57,6 +57,7 @@ public class ProxyProcessorSupport extends ProxyConfig implements Ordered, BeanC
 	 * Set the ordering which will apply to this processor's implementation
 	 * of {@link Ordered}, used when applying multiple processors.
 	 * <p>The default value is {@code Ordered.LOWEST_PRECEDENCE}, meaning non-ordered.
+	 *
 	 * @param order the ordering value
 	 */
 	public void setOrder(int order) {
@@ -96,26 +97,21 @@ public class ProxyProcessorSupport extends ProxyConfig implements Ordered, BeanC
 
 
 	/**
-	 * Check the interfaces on the given bean class and apply them to the {@link ProxyFactory},
-	 * if appropriate.
-	 * <p>Calls {@link #isConfigurationCallbackInterface} and {@link #isInternalLanguageInterface}
-	 * to filter for reasonable proxy interfaces, falling back to a target-class proxy otherwise.
-	 * @param beanClass the class of the bean
-	 * @param proxyFactory the ProxyFactory for the bean
-	 *
 	 * 评估给定的bean采用springAop代理，还是使用cglib进行代理
 	 * 判断方式主要是类是否实现一些接口当然这些接口不能为spring提供的内置callback接口以及一些自定义的通用接口
 	 */
 	protected void evaluateProxyInterfaces(Class<?> beanClass, ProxyFactory proxyFactory) {
-		// 获取bean实现的所有接口
+		/**
+		 * 1.获取bean实现的所有接口
+		 */
 		Class<?>[] targetInterfaces = ClassUtils.getAllInterfacesForClass(beanClass, getProxyClassLoader());
 		boolean hasReasonableProxyInterface = false;
+		/**
+		 * 2. 排除 spring提供的callback接口、通用接口不可代理、没有方法的接口
+		 */
 		for (Class<?> ifc : targetInterfaces) {
-			// 非spring提供的callback接口。
-			// 非通用接口
-			// 同时接口含有方法
-			if (!isConfigurationCallbackInterface(ifc) && !isInternalLanguageInterface(ifc) &&
-					ifc.getMethods().length > 0) {
+
+			if (!isConfigurationCallbackInterface(ifc) && !isInternalLanguageInterface(ifc) && ifc.getMethods().length > 0) {
 				hasReasonableProxyInterface = true;
 				break;
 			}
@@ -137,9 +133,10 @@ public class ProxyProcessorSupport extends ProxyConfig implements Ordered, BeanC
 	 * therefore not to be considered as a reasonable proxy interface.
 	 * <p>If no reasonable proxy interface is found for a given bean, it will get
 	 * proxied with its full target class, assuming that as the user's intention.
+	 *
 	 * @param ifc the interface to check
 	 * @return whether the given interface is just a container callback
-	 *
+	 * <p>
 	 * 判断接口类是不是spring提供的callback接口
 	 */
 	protected boolean isConfigurationCallbackInterface(Class<?> ifc) {
@@ -152,9 +149,10 @@ public class ProxyProcessorSupport extends ProxyConfig implements Ordered, BeanC
 	 * and therefore not to be considered as a reasonable proxy interface.
 	 * <p>If no reasonable proxy interface is found for a given bean, it will get
 	 * proxied with its full target class, assuming that as the user's intention.
+	 *
 	 * @param ifc the interface to check
 	 * @return whether the given interface is an internal language interface
-	 *
+	 * <p>
 	 * 是否是如下通用的接口。若实现的是这些接口也会排除，不认为它是实现了接口的类
 	 */
 	protected boolean isInternalLanguageInterface(Class<?> ifc) {

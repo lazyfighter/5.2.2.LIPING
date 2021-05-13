@@ -58,7 +58,7 @@ import org.springframework.lang.Nullable;
 public interface BeanPostProcessor {
 
 	/**
-	 * bean实例化，注入完成字段，所有bean没有调用初始化之前调用
+	 * bean实例化完成注入字段，所有bean没有调用初始化之前调用
 	 */
 	@Nullable
 	default Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
@@ -66,7 +66,7 @@ public interface BeanPostProcessor {
 	}
 
 	/**
-	 * 所有bean调用完初始化之后调用
+	 * bean初始化完成之后调用
 	 */
 	@Nullable
 	default Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {

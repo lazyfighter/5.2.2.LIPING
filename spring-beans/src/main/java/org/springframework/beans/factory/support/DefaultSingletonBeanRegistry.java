@@ -70,10 +70,10 @@ import org.springframework.util.StringUtils;
  */
 public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements SingletonBeanRegistry {
 
-	// 缓存创建完成的bean，同时它的依赖也已经完成注入
+	// 缓存创建完成的bean，同时它的依赖也已经完成注入， 完全初始化的bean
 	private final Map<String, Object> singletonObjects = new ConcurrentHashMap<>(256);
 
-	// 缓存bean的factory
+	// 缓存bean的工厂类
 	private final Map<String, ObjectFactory<?>> singletonFactories = new HashMap<>(16);
 
 	// 缓存的是创建完成了bean, 但是还没有注入依赖bean
