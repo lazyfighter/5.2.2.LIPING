@@ -133,12 +133,21 @@ public abstract class AbstractAutoProxyCreator extends ProxyProcessorSupport imp
 	@Nullable
 	private BeanFactory beanFactory;
 
+	/**
+	 * 之前被用户自定义的beanPostProcessor代理过
+	 */
 	private final Set<String> targetSourcedBeans = Collections.newSetFromMap(new ConcurrentHashMap<>(16));
 
+	/**
+	 * 提早暴露的引用， 还没有完成bean的初始化以及属性注入
+	 */
 	private final Map<Object, Object> earlyProxyReferences = new ConcurrentHashMap<>(16);
 
 	private final Map<Object, Class<?>> proxyTypes = new ConcurrentHashMap<>(16);
 
+	/**
+	 * 缓存bean是否被代理过
+	 */
 	private final Map<Object, Boolean> advisedBeans = new ConcurrentHashMap<>(256);
 
 
@@ -235,6 +244,10 @@ public abstract class AbstractAutoProxyCreator extends ProxyProcessorSupport imp
 		return null;
 	}
 
+
+	/**
+	 * 判断bean是否需要进行拦截，如果需要拦截暴露proxy的引用
+	 */
 	@Override
 	public Object getEarlyBeanReference(Object bean, String beanName) {
 		Object cacheKey = getCacheKey(bean.getClass(), beanName);
@@ -289,7 +302,7 @@ public abstract class AbstractAutoProxyCreator extends ProxyProcessorSupport imp
 	}
 
 	/**
-	 * 判断给定的bean是否需要进行拦截， 如果需要拦截则创建代理对象， 然后返回代理对象
+	 * 判断给定的bean是否被暴露过也就是被别人引用过， 如果引用过，则直接返回bean ，不再返回proxy
 	 */
 	@Override
 	public Object postProcessAfterInitialization(@Nullable Object bean, String beanName) {
@@ -325,33 +338,39 @@ public abstract class AbstractAutoProxyCreator extends ProxyProcessorSupport imp
 	}
 
 	/**
-	 * Wrap the given bean if necessary, i.e. if it is eligible for being proxied.
-	 * @param bean the raw bean instance
-	 * @param beanName the name of the bean
-	 * @param cacheKey the cache key for metadata access
-	 * @return a proxy wrapping the bean, or the raw bean instance as-is
-	 *
-	 * 判断是否用advisor可以应用到该bean上，如果有创建代理对象，暴露代理
+	 * 判断给定的bean是否有可用用advisor可以应用，如果有创建代理对象，暴露代理
 	 * 如果没有返回原bean
 	 */
 	protected Object wrapIfNecessary(Object bean, String beanName, Object cacheKey) {
+		/**
+		 * 1. 格式判断，
+		 */
 		if (StringUtils.hasLength(beanName) && this.targetSourcedBeans.contains(beanName)) {
 			return bean;
 		}
+		/**
+		 * 2. 从缓存里面获取，如果不需要被代理则直接返回
+		 */
 		if (Boolean.FALSE.equals(this.advisedBeans.get(cacheKey))) {
 			return bean;
 		}
+
+		/**
+		 * 3. 没有被处理过，则判断bean是否可以被代理
+		 */
 		if (isInfrastructureClass(bean.getClass()) || shouldSkip(bean.getClass(), beanName)) {
 			this.advisedBeans.put(cacheKey, Boolean.FALSE);
 			return bean;
 		}
 
-		// Create proxy if we have advice. 获取可以应用到该bean上面的advisor
+
+		/**
+		 * 4. 获取所有适合该bean的切面
+		 */
 		Object[] specificInterceptors = getAdvicesAndAdvisorsForBean(bean.getClass(), beanName, null);
 		if (specificInterceptors != DO_NOT_PROXY) {
 			this.advisedBeans.put(cacheKey, Boolean.TRUE);
-			Object proxy = createProxy(
-					bean.getClass(), beanName, specificInterceptors, new SingletonTargetSource(bean));
+			Object proxy = createProxy(bean.getClass(), beanName, specificInterceptors, new SingletonTargetSource(bean));
 			this.proxyTypes.put(cacheKey, proxy.getClass());
 			logger.info("wrap bean:" + bean.getClass() + " return proxy");
 			return proxy;
@@ -443,8 +462,7 @@ public abstract class AbstractAutoProxyCreator extends ProxyProcessorSupport imp
 	 * @return the AOP proxy for the bean
 	 * @see #buildAdvisors
 	 */
-	protected Object createProxy(Class<?> beanClass, @Nullable String beanName,
-			@Nullable Object[] specificInterceptors, TargetSource targetSource) {
+	protected Object createProxy(Class<?> beanClass, @Nullable String beanName, @Nullable Object[] specificInterceptors, TargetSource targetSource) {
 		// 设置proxy bean的属性
 		if (this.beanFactory instanceof ConfigurableListableBeanFactory) {
 			AutoProxyUtils.exposeTargetClass((ConfigurableListableBeanFactory) this.beanFactory, beanName, beanClass);
@@ -572,23 +590,9 @@ public abstract class AbstractAutoProxyCreator extends ProxyProcessorSupport imp
 
 
 	/**
-	 * Return whether the given bean is to be proxied, what additional
-	 * advices (e.g. AOP Alliance interceptors) and advisors to apply.
-	 * @param beanClass the class of the bean to advise
-	 * @param beanName the name of the bean
-	 * @param customTargetSource the TargetSource returned by the
-	 * {@link #getCustomTargetSource} method: may be ignored.
-	 * Will be {@code null} if no custom target source is in use.
-	 * @return an array of additional interceptors for the particular bean;
-	 * or an empty array if no additional interceptors but just the common ones;
-	 * or {@code null} if no proxy at all, not even with the common interceptors.
-	 * See constants DO_NOT_PROXY and PROXY_WITHOUT_ADDITIONAL_INTERCEPTORS.
-	 * @throws BeansException in case of errors
-	 * @see #DO_NOT_PROXY
-	 * @see #PROXY_WITHOUT_ADDITIONAL_INTERCEPTORS
+	 * 返回适合该bean的所有代理拦截器
 	 */
 	@Nullable
-	protected abstract Object[] getAdvicesAndAdvisorsForBean(Class<?> beanClass, String beanName,
-			@Nullable TargetSource customTargetSource) throws BeansException;
+	protected abstract Object[] getAdvicesAndAdvisorsForBean(Class<?> beanClass, String beanName, @Nullable TargetSource customTargetSource) throws BeansException;
 
 }
