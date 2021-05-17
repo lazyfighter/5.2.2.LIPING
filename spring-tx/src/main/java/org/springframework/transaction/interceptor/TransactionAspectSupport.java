@@ -173,11 +173,9 @@ public abstract class TransactionAspectSupport implements BeanFactoryAware, Init
 	@Nullable
 	private BeanFactory beanFactory;
 
-	private final ConcurrentMap<Object, TransactionManager> transactionManagerCache =
-			new ConcurrentReferenceHashMap<>(4);
+	private final ConcurrentMap<Object, TransactionManager> transactionManagerCache = new ConcurrentReferenceHashMap<>(4);
 
-	private final ConcurrentMap<Method, ReactiveTransactionSupport> transactionSupportCache =
-			new ConcurrentReferenceHashMap<>(1024);
+	private final ConcurrentMap<Method, ReactiveTransactionSupport> transactionSupportCache = new ConcurrentReferenceHashMap<>(1024);
 
 
 	protected TransactionAspectSupport() {
@@ -326,8 +324,7 @@ public abstract class TransactionAspectSupport implements BeanFactoryAware, Init
 	 * @throws Throwable propagated from the target invocation
 	 */
 	@Nullable
-	protected Object invokeWithinTransaction(Method method, @Nullable Class<?> targetClass,
-			final InvocationCallback invocation) throws Throwable {
+	protected Object invokeWithinTransaction(Method method, @Nullable Class<?> targetClass, final InvocationCallback invocation) throws Throwable {
 
 		// If the transaction attribute is null, the method is non-transactional.
 		TransactionAttributeSource tas = getTransactionAttributeSource();

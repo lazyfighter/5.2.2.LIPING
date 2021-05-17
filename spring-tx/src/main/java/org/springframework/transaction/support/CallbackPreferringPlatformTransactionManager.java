@@ -55,7 +55,6 @@ public interface CallbackPreferringPlatformTransactionManager extends PlatformTr
 	 * @throws RuntimeException if thrown by the TransactionCallback
 	 */
 	@Nullable
-	<T> T execute(@Nullable TransactionDefinition definition, TransactionCallback<T> callback)
-			throws TransactionException;
+	<T> T execute(@Nullable TransactionDefinition definition, TransactionCallback<T> callback) throws TransactionException;
 
 }

@@ -39,25 +39,12 @@ import org.springframework.lang.Nullable;
 public interface AspectJAdvisorFactory {
 
 	/**
-	 * Determine whether or not the given class is an aspect, as reported
-	 * by AspectJ's {@link org.aspectj.lang.reflect.AjTypeSystem}.
-	 * <p>Will simply return {@code false} if the supposed aspect is
-	 * invalid (such as an extension of a concrete aspect class).
-	 * Will return true for some aspects that Spring AOP cannot process,
-	 * such as those with unsupported instantiation models.
-	 * Use the {@link #validate} method to handle these cases if necessary.
-	 * @param clazz the supposed annotation-style AspectJ class
-	 * @return whether or not this class is recognized by AspectJ as an aspect class
+	 * 判断给定的类是否是切面
 	 */
 	boolean isAspect(Class<?> clazz);
 
 	/**
-	 * Is the given class a valid AspectJ aspect class?
-	 * @param aspectClass the supposed AspectJ annotation-style class to validate
-	 * @throws AopConfigException if the class is an invalid aspect
-	 * (which can never be legal)
-	 * @throws NotAnAtAspectException if the class is not an aspect at all
-	 * (which may or may not be legal, depending on the context)
+	 * 检验给定的切面类
 	 */
 	void validate(Class<?> aspectClass) throws AopConfigException;
 
@@ -81,8 +68,7 @@ public interface AspectJAdvisorFactory {
 	 * create a Spring advice in its own right
 	 */
 	@Nullable
-	Advisor getAdvisor(Method candidateAdviceMethod, MetadataAwareAspectInstanceFactory aspectInstanceFactory,
-			int declarationOrder, String aspectName);
+	Advisor getAdvisor(Method candidateAdviceMethod, MetadataAwareAspectInstanceFactory aspectInstanceFactory, int declarationOrder, String aspectName);
 
 	/**
 	 * Build a Spring AOP Advice for the given AspectJ advice method.
@@ -101,7 +87,6 @@ public interface AspectJAdvisorFactory {
 	 * @see org.springframework.aop.aspectj.AspectJAfterThrowingAdvice
 	 */
 	@Nullable
-	Advice getAdvice(Method candidateAdviceMethod, AspectJExpressionPointcut expressionPointcut,
-			MetadataAwareAspectInstanceFactory aspectInstanceFactory, int declarationOrder, String aspectName);
+	Advice getAdvice(Method candidateAdviceMethod, AspectJExpressionPointcut expressionPointcut, MetadataAwareAspectInstanceFactory aspectInstanceFactory, int declarationOrder, String aspectName);
 
 }

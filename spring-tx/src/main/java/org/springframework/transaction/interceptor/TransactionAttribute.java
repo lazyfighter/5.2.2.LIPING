@@ -35,19 +35,12 @@ import org.springframework.transaction.TransactionDefinition;
 public interface TransactionAttribute extends TransactionDefinition {
 
 	/**
-	 * Return a qualifier value associated with this transaction attribute.
-	 * <p>This may be used for choosing a corresponding transaction manager
-	 * to process this specific transaction.
-	 * @since 3.0
+	 * 事务管理器bean名称
 	 */
 	@Nullable
 	String getQualifier();
 
 	/**
-	 * Should we roll back on the given exception?
-	 * @param ex the exception to evaluate
-	 * @return whether to perform a rollback or not
-	 *
 	 * 判断是否应该回滚
 	 */
 	boolean rollbackOn(Throwable ex);

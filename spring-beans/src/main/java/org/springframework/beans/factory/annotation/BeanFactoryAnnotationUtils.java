@@ -85,7 +85,7 @@ public abstract class BeanFactoryAnnotationUtils {
 	 * @throws BeansException if the bean could not be created
 	 * @see BeanFactoryUtils#beanOfTypeIncludingAncestors(ListableBeanFactory, Class)
 	 */
-	public static <T> T qualifiedBeanOfType(BeanFactory beanFactory, Class<T> beanType, String qualifier)
+	public static <T> T  qualifiedBeanOfType(BeanFactory beanFactory, Class<T> beanType, String qualifier)
 			throws BeansException {
 
 		Assert.notNull(beanFactory, "BeanFactory must not be null");

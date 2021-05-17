@@ -344,8 +344,7 @@ public abstract class AbstractPlatformTransactionManager implements PlatformTran
 	 * @definition transaction的config
 	 */
 	@Override
-	public final TransactionStatus getTransaction(@Nullable TransactionDefinition definition)
-			throws TransactionException {
+	public final TransactionStatus getTransaction(@Nullable TransactionDefinition definition) throws TransactionException {
 
 		// 如果没有transaction的config采用spring内置默认的
 		TransactionDefinition def = (definition != null ? definition : TransactionDefinition.withDefaults());

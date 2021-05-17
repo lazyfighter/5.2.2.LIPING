@@ -71,8 +71,7 @@ public interface PlatformTransactionManager extends TransactionManager {
 	 *
 	 * 根据事务定义TransactionDefinition，获取事务
 	 */
-	TransactionStatus getTransaction(@Nullable TransactionDefinition definition)
-			throws TransactionException;
+	TransactionStatus getTransaction(@Nullable TransactionDefinition definition) throws TransactionException;
 
 	/**
 	 * Commit the given transaction, with regard to its status. If the transaction
