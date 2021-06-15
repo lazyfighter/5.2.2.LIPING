@@ -71,8 +71,7 @@ public class ImportBeanDefinitionRegistrarTests {
 	}
 
 
-	private static class SampleRegistrar implements ImportBeanDefinitionRegistrar,
-			BeanClassLoaderAware, ResourceLoaderAware, BeanFactoryAware, EnvironmentAware {
+	private static class SampleRegistrar implements ImportBeanDefinitionRegistrar, BeanClassLoaderAware, ResourceLoaderAware, BeanFactoryAware, EnvironmentAware {
 
 		static ClassLoader classLoader;
 		static ResourceLoader resourceLoader;

@@ -59,20 +59,15 @@ import org.springframework.beans.BeansException;
  * @see BeanPostProcessor
  * @see PropertyResourceConfigurer
  *
- * applicationContext初始化的时候，第一补是扫描classpath下面的标记@Component以及它的派生注解类，然后加载到beanFactory中
- * BeanFactoryPostProcessor提供的能力是可以修改这些beanFactoryPostProssor，同时它的实现类也可以完成一些额外的加载工作，
+ * applicationContext初始化的时候，第一步是扫描classpath下面的标记@Component以及它的派生注解类，然后加载到beanDefinitionRegistry中
+ * BeanFactoryPostProcessor提供的能力是可以修改这些BeanDefinition，同时它的实现类也可以完成一些额外的加载工作，
  * 比如解析@Configuration注解类，注入@Configuration配置的bean
  */
 @FunctionalInterface
 public interface BeanFactoryPostProcessor {
 
 	/**
-	 * Modify the application context's internal bean factory after its standard
-	 * initialization. All bean definitions will have been loaded, but no beans
-	 * will have been instantiated yet. This allows for overriding or adding
-	 * properties even to eager-initializing beans.
-	 * @param beanFactory the bean factory used by the application context
-	 * @throws org.springframework.beans.BeansException in case of errors
+	 * 用来修改容器的中的beanDefinition
 	 */
 	void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException;
 
