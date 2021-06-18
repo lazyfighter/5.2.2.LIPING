@@ -410,8 +410,7 @@ public class PropertiesBeanDefinitionReader extends AbstractBeanDefinitionReader
 	 * Map came from (for logging purposes)
 	 * @throws BeansException if the bean definition could not be parsed or registered
 	 */
-	protected void registerBeanDefinition(String beanName, Map<?, ?> map, String prefix, String resourceDescription)
-			throws BeansException {
+	protected void registerBeanDefinition(String beanName, Map<?, ?> map, String prefix, String resourceDescription) throws BeansException {
 
 		String className = null;
 		String parent = null;

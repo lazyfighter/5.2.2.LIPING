@@ -207,29 +207,11 @@ public interface PropertyAccessor {
 	 * successfully updated.
 	 * @see #setPropertyValues(PropertyValues, boolean, boolean)
 	 */
-	void setPropertyValues(PropertyValues pvs, boolean ignoreUnknown)
-			throws BeansException;
+	void setPropertyValues(PropertyValues pvs, boolean ignoreUnknown) throws BeansException;
 
 	/**
-	 * Perform a batch update with full control over behavior.
-	 * <p>Note that performing a batch update differs from performing a single update,
-	 * in that an implementation of this class will continue to update properties
-	 * if a <b>recoverable</b> error (such as a type mismatch, but <b>not</b> an
-	 * invalid field name or the like) is encountered, throwing a
-	 * {@link PropertyBatchUpdateException} containing all the individual errors.
-	 * This exception can be examined later to see all binding errors.
-	 * Properties that were successfully updated remain changed.
-	 * @param pvs a PropertyValues to set on the target object
-	 * @param ignoreUnknown should we ignore unknown properties (not found in the bean)
-	 * @param ignoreInvalid should we ignore invalid properties (found but not accessible)
-	 * @throws InvalidPropertyException if there is no such property or
-	 * if the property isn't writable
-	 * @throws PropertyBatchUpdateException if one or more PropertyAccessExceptions
-	 * occurred for specific properties during the batch update. This exception bundles
-	 * all individual PropertyAccessExceptions. All other properties will have been
-	 * successfully updated.
+	 * 批量进行设置字段
 	 */
-	void setPropertyValues(PropertyValues pvs, boolean ignoreUnknown, boolean ignoreInvalid)
-			throws BeansException;
+	void setPropertyValues(PropertyValues pvs, boolean ignoreUnknown, boolean ignoreInvalid) throws BeansException;
 
 }
